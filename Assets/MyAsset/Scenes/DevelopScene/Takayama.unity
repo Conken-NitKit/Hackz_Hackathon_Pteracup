@@ -931,7 +931,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2101213549}
+      - m_Target: {fileID: 1186946423}
         m_TargetAssemblyTypeName: MyAsset.Scripts.UI.BaseButtonController, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -942,7 +942,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1186946421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2101213549}
+      - m_Target: {fileID: 1417985500}
         m_TargetAssemblyTypeName: MyAsset.Scripts.UI.BaseButtonController, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -1234,7 +1234,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1417985498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,7 +1449,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2101213549}
+      - m_Target: {fileID: 1522494218}
         m_TargetAssemblyTypeName: MyAsset.Scripts.UI.BaseButtonController, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -1460,7 +1460,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1522494216
 MonoBehaviour:
   m_ObjectHideFlags: 0

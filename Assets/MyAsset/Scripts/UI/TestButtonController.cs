@@ -11,6 +11,7 @@ public class TestButtonController : BaseButtonController
     [SerializeField] private Text commandText;
     protected override void OnClick(string objectName)
     {
+        Debug.Log(objectName);
         if ("CheckButton".Equals(objectName))
         {
             // チェックがクリックされたとき
@@ -21,10 +22,10 @@ public class TestButtonController : BaseButtonController
             // 攻撃ボタンがクリックされたとき
             this.AttackClick();
         }
-        else if ("DefenceButton".Equals(objectName))
+        else if ("GuardButton".Equals(objectName))
         {
             // 防御ボタンがクリックされたとき
-            this.DefenceClick();
+            this.GuardClick();
         }
         else if ("SpacialButton".Equals(objectName))
         {
@@ -51,7 +52,7 @@ public class TestButtonController : BaseButtonController
         commandText.text = $"攻撃量:{objMonster.BaseAtk * objMonster.StatusBuff}";
     }
     
-    private void DefenceClick()
+    private void GuardClick()
     {
         commandText.text = $"防御量:{objMonster.BaseDef * objMonster.StatusBuff}";
     }
