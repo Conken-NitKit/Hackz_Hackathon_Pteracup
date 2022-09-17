@@ -41,20 +41,20 @@ public class TestButtonController : BaseButtonController
     private void CheckClick()
     {
         SpriteRenderer objSprite = objMonster.gameObject.GetComponent<SpriteRenderer>();
-        objMonster.Initialize(input.text);
-        statusText.text = $"HP:{objMonster.BaseHp},バフ量:{objMonster.StatusBuff},攻撃力:{objMonster.BaseAtk},防御力:{objMonster.BaseDef},MP:{objMonster.BaseMp},特殊コマンド:{objMonster.SpacialCommand}";
+        objMonster.BuildStatus(input.text);
+        statusText.text = $"HP:{objMonster.BaseHp},バフ量:{objMonster.Buff},攻撃力:{objMonster.BaseAtk},防御力:{objMonster.BaseDef},MP:{objMonster.BaseMp},特殊コマンド:{objMonster.SpacialCommand}";
         objSprite.color = objMonster.StatusColor;
         commandText.text = "ステータス生成";
     }
 
     private void AttackClick()
     {
-        commandText.text = $"攻撃量:{objMonster.BaseAtk * objMonster.StatusBuff}";
+        commandText.text = $"攻撃量:{objMonster.BaseAtk * objMonster.Buff}";
     }
     
     private void GuardClick()
     {
-        commandText.text = $"防御量:{objMonster.BaseDef * objMonster.StatusBuff}";
+        commandText.text = $"防御量:{objMonster.BaseDef * objMonster.Buff}";
     }
     
     private void SpacialClick()
