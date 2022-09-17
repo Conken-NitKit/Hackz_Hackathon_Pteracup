@@ -59,6 +59,6 @@ public class TestButtonController : BaseButtonController
     
     private void SpacialClick()
     {
-        commandText.text = $"特殊タイプ:{objMonster.SpacialCommand.type}";
+        commandText.text = $"特殊タイプ:{objMonster.SpacialCommand.Type}";
     }
 }

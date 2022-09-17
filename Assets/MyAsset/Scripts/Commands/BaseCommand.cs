@@ -18,6 +18,6 @@ public class BaseCommand : ScriptableObject {
         AttackBuff,
         Attack
     }
-    public string commandName;
-    public CommandType type;
+    public string CommandName { get; set; }
+    public readonly CommandType Type;
 }
