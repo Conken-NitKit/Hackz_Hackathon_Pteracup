@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
     /// 基礎HP
     /// </summary>
     [field: SerializeField, Header("HP")] public int BaseHp { get; private set; }
-    [MinMaxSlider(0, 100)] [SerializeField] private Vector2Int hpRange = new Vector2Int(10,35);
+    [MinMaxSlider(0, 100)] [SerializeField] private Vector2Int hpRange = new Vector2Int(10,25);
 
     /// <summary>
     /// 基礎攻撃力
