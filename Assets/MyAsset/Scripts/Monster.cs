@@ -79,7 +79,7 @@ public class Monster : MonoBehaviour
         
         float minBuff = buffRange.x,maxBuff = buffRange.y;
         Buff = rNum[0] / 15f * maxBuff + minBuff;
-        SpacialCommand = commands[rNum[1] % commands.Length];
+        //SpacialCommand = commands[rNum[1] % commands.Length];
 
         int seedMaxNum = 15;
         BaseHp = CalcStatus(randNums[gNum[0]], seedMaxNum, hpRange);
