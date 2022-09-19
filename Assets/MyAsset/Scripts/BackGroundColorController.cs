@@ -9,24 +9,10 @@ using UnityEngine.UI;
 public class BackGroundColorController : MonoBehaviour
 {
 
-    private float redValue;
-    private float greenValue;
-    private float blueValue;
+    private float redValue = 0;
+    private float greenValue = 0;
+    private float blueValue = 0;
     private float colorLimit = 255;
-
-    [SerializeField]
-    private Slider redGauge;
-    [SerializeField]
-    private Slider greenGauge;
-    [SerializeField]
-    private Slider blueGauge;
-
-    [SerializeField]
-    private Button startButton;
-    [SerializeField]
-    private Button imageSelectionButton;
-    [SerializeField]
-    private Button rankingButton;
 
     [SerializeField]
     private Text titleText;
@@ -37,40 +23,27 @@ public class BackGroundColorController : MonoBehaviour
     [SerializeField]
     private Text rankingText;
 
-    [SerializeField]
-    private GameObject background;
-
     void Start()
     {
         
     }
 
-    /// <summary>
-    /// TitleSceneの左下にあるバーが動かされたときにその値によって色を変更する関数
-    /// </summary>
-    public void ColorUpdate()
+    void FixedUpdate()
     {
-        redValue = redGauge.value;
-        greenValue = greenGauge.value;
-        blueValue = blueGauge.value;
 
-        startText.color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
-        imageSelectionText.color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
-        rankingText.color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
+        redValue += Mathf.Sin(Time.deltaTime) * colorLimit;
+        greenValue += Mathf.Cos(Time.deltaTime) * colorLimit;
+        blueValue += (Mathf.Sin(Time.deltaTime) + Mathf.Cos(Time.deltaTime)) * colorLimit;
 
-        //background.GetComponent<SpriteRenderer>().color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
 
-        redValue += colorLimit / 2;
-        greenValue += colorLimit / 2;
-        blueValue += colorLimit / 2;
         redValue %= colorLimit;
         greenValue %= colorLimit;
         blueValue %= colorLimit;
 
+        startText.color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
+        imageSelectionText.color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
+        rankingText.color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
         titleText.color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
-
-        startButton.GetComponent<Image>().color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
-        imageSelectionButton.GetComponent<Image>().color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
-        //rankingButton.GetComponent<Image>().color = new Color32((byte)redValue, (byte)greenValue, (byte)blueValue, 255);
+        
     }
 }
