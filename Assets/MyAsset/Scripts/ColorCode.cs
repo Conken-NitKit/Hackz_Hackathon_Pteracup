@@ -3,22 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 画像のカラーコード決定クラス
+/// </summary>
 public class ColorCode : MonoBehaviour
 {
     private Color centerColor;
 
-    public Texture2D tex{ private get; set; }
+    public Texture2D Tex{ private get; set; }
     
     public String HexadecimalCenterColor { get; private set; }
 
+    /// <summary>
+    /// 画像からカラーコードをとってくる関数
+    /// とってくるのは画像のど真ん中の色
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator GetCenterColor()
     {
         yield return new WaitForEndOfFrame();
 
-        tex.ReadPixels(new Rect(0, 0, tex.width/2, tex.height/2), 0, 0);
+        Tex.ReadPixels(new Rect(0, 0, Tex.width/2, Tex.height/2), 0, 0);
 
-        centerColor = tex.GetPixel(tex.width / 2, tex.height / 2);
-        HexadecimalCenterColor = ColorUtility.ToHtmlStringRGB(centerColor);
+        centerColor = Tex.GetPixel(Tex.width / 2, Tex.height / 2);
+        HexadecimalCenterColor = $"#{ColorUtility.ToHtmlStringRGB(centerColor)}";
         
         Debug.Log(HexadecimalCenterColor);
     }

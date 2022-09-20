@@ -79,7 +79,7 @@ public class Monster : MonoBehaviour
         
         float minBuff = buffRange.x,maxBuff = buffRange.y;
         Buff = rNum[0] / 15f * maxBuff + minBuff;
-        SpacialCommand = commands[rNum[1] % commands.Length];
+        //SpacialCommand = commands[rNum[1] % commands.Length];
 
         int seedMaxNum = 15;
         BaseHp = CalcStatus(randNums[gNum[0]], seedMaxNum, hpRange);
@@ -93,7 +93,8 @@ public class Monster : MonoBehaviour
     /// </summary>
     /// <param name="value">個体値を決定する数字</param>
     /// <param name="seedMax">個体値の最大値 基本的には15をとる</param>
-    /// <param name="minMax">最小最大値を管理するVector2Int</param>
+    /// <param name="minMax">最
+    /// 小最大値を管理するVector2Int</param>
     /// <returns></returns>
     private int CalcStatus(int value,int seedMax, Vector2Int minMax)
     {
