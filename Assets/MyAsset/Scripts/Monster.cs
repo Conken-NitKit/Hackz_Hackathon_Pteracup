@@ -93,7 +93,8 @@ public class Monster : MonoBehaviour
     /// </summary>
     /// <param name="value">個体値を決定する数字</param>
     /// <param name="seedMax">個体値の最大値 基本的には15をとる</param>
-    /// <param name="minMax">最小最大値を管理するVector2Int</param>
+    /// <param name="minMax">最
+    /// 小最大値を管理するVector2Int</param>
     /// <returns></returns>
     private int CalcStatus(int value,int seedMax, Vector2Int minMax)
     {

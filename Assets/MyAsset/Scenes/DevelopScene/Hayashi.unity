@@ -268,6 +268,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28937617}
   m_CullTransparentMesh: 1
+--- !u!1 &296973441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 296973443}
+  - component: {fileID: 296973442}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &296973442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296973441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816ea2a7dfa443be957b5b8f565bb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerTurn:
+    value: 1
+  baseEnemy: {fileID: 3393154869376818589, guid: 4769c17e263a54f85b10f3ca5938ca15, type: 3}
+  monster: {fileID: 730965734}
+--- !u!4 &296973443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296973441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577787957
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +327,6 @@ GameObject:
   - component: {fileID: 577787960}
   - component: {fileID: 577787959}
   - component: {fileID: 577787958}
-  - component: {fileID: 577787962}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -362,7 +408,6 @@ RectTransform:
   m_Children:
   - {fileID: 730965738}
   - {fileID: 1296164723}
-  - {fileID: 667203350}
   - {fileID: 827842458}
   - {fileID: 997909712}
   - {fileID: 1819140243}
@@ -377,111 +422,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &577787962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577787957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e816ea2a7dfa443be957b5b8f565bb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayerTurn:
-    value: 1
-  enemy: {fileID: 667203351}
---- !u!1 &667203349
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 667203350}
-  - component: {fileID: 667203353}
-  - component: {fileID: 667203352}
-  - component: {fileID: 667203351}
-  m_Layer: 5
-  m_Name: enemy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &667203350
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667203349}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 577787961}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -215.6, y: 133}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &667203351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667203349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d801909d135d4c1ca95c0a2689c898b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 730965734}
-  gameMgr: {fileID: 577787962}
---- !u!114 &667203352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667203349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &667203353
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667203349}
-  m_CullTransparentMesh: 1
 --- !u!1 &730965733
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,11 +433,11 @@ GameObject:
   - component: {fileID: 730965738}
   - component: {fileID: 730965737}
   - component: {fileID: 730965735}
-  - component: {fileID: 730965734}
   - component: {fileID: 730965736}
+  - component: {fileID: 730965734}
   m_Layer: 5
   m_Name: monster
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -511,13 +451,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 730965733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ead2f14a4c085477896fbacc92c875eb, type: 3}
+  m_Script: {fileID: 11500000, guid: c95983b3dfdc44c86a2ec49c250ac583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 730965736}
   colorCode: {fileID: 1296164718}
-  enemy: {fileID: 667203351}
-  gameMgr: {fileID: 577787962}
+  gameMgr: {fileID: 296973442}
 --- !u!114 &730965735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Buff>k__BackingField: 0
-  buffRange: {x: 0, y: 1.5}
+  buffRange: {x: 1, y: 2.5}
   <BaseHp>k__BackingField: 0
   hpRange: {x: 10, y: 25}
   <BaseAtk>k__BackingField: 0
@@ -631,7 +570,7 @@ RectTransform:
   m_Children:
   - {fileID: 1654213385}
   m_Father: {fileID: 577787961}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -683,7 +622,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730965734}
-        m_TargetAssemblyTypeName: TestMonster, Assembly-CSharp
+        m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
         m_MethodName: RunMonsterCommand
         m_Mode: 5
         m_Arguments:
@@ -764,7 +703,7 @@ RectTransform:
   m_Children:
   - {fileID: 1203410728}
   m_Father: {fileID: 577787961}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -816,7 +755,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730965734}
-        m_TargetAssemblyTypeName: TestMonster, Assembly-CSharp
+        m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
         m_MethodName: RunMonsterCommand
         m_Mode: 5
         m_Arguments:
@@ -976,7 +915,7 @@ RectTransform:
   m_Children:
   - {fileID: 1548875748}
   m_Father: {fileID: 577787961}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1028,7 +967,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730965734}
-        m_TargetAssemblyTypeName: TestMonster, Assembly-CSharp
+        m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
         m_MethodName: GenerateMonster
         m_Mode: 1
         m_Arguments:
@@ -1594,7 +1533,7 @@ RectTransform:
   m_Children:
   - {fileID: 1332323161}
   m_Father: {fileID: 577787961}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1645,8 +1584,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 667203351}
-        m_TargetAssemblyTypeName: TestEnemy, Assembly-CSharp
+      - m_Target: {fileID: 296973442}
+        m_TargetAssemblyTypeName: TestGameMgr, Assembly-CSharp
         m_MethodName: DisplayStatus
         m_Mode: 1
         m_Arguments:
@@ -1806,7 +1745,7 @@ RectTransform:
   m_Children:
   - {fileID: 2092888983}
   m_Father: {fileID: 577787961}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1857,7 +1796,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 730965734}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TestMonster, Assembly-CSharp
         m_MethodName: RunMonsterCommand
         m_Mode: 5
@@ -1939,7 +1878,7 @@ RectTransform:
   m_Children:
   - {fileID: 1137540975}
   m_Father: {fileID: 577787961}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

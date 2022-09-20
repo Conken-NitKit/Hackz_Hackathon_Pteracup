@@ -5,44 +5,54 @@ using UnityEngine;
 using UniRx;
 using Random = UnityEngine.Random;
 
-public class TestEnemy : MonoBehaviour
+public class BattleEnemy : MonoBehaviour
 {
-    public int EnemyInitialHp { get; set; }
-    private ReactiveProperty<int> enemyNowHp = new ReactiveProperty<int>();
+    private int EnemyInitialHp { get; set; }
+    public ReactiveProperty<int> enemyNowHp = new ReactiveProperty<int>();
     private Vector2Int hpRange = new Vector2Int(20,50);
     
-    public int EnemyInitialAtk { get; set; }
-    private int enemyNowAtk;
+    private int EnemyInitialAtk { get; set; }
+    public int enemyNowAtk;
     private Vector2Int atkRange = new Vector2Int(5,15);
     
-    public int EnemyInitialDef { get; set; }
-    private int enemyNowDef;
+    private int EnemyInitialDef { get; set; }
+    public int enemyNowDef;
     private Vector2Int defRange = new Vector2Int(0,10);
 
+    private bool dieEnemy;
+
     [SerializeField]
-    private TestMonster monster;
+    private BattleMonster monster;
     
     [SerializeField] 
     private TestGameMgr gameMgr;
 
-    private void Start()
-    {
-        BuildEnemyStats();
-    }
+    private IDisposable subscription;
+    
 
-
-    private void BuildEnemyStats()
+    public void BuildEnemyStats()
     {
+        if (!(subscription == null))
+        {
+            subscription.Dispose();
+        }
+        
+        monster = GameObject.FindWithTag("Monster").GetComponent<BattleMonster>();
+        gameMgr = GameObject.FindWithTag("GameManager").GetComponent<TestGameMgr>();
+        
         EnemyInitialHp = Random.Range(hpRange.x, hpRange.y);
         enemyNowHp.Value = EnemyInitialHp;
         
-        var subscription = enemyNowHp.Subscribe(x => {
+        subscription = enemyNowHp.Subscribe(x => {
             if (enemyNowHp.Value < 0)
             {
                 enemyNowHp.Value = 0;
                 Debug.Log("エネミーは倒れた！");
+                gameMgr.GoNextStage();
+                Destroy(this.gameObject);
             }
         });
+        Debug.Log($"エネミーHp:{enemyNowHp.Value}");
 
         EnemyInitialAtk = Random.Range(atkRange.x, atkRange.y);
         enemyNowAtk = EnemyInitialAtk;
@@ -115,13 +125,6 @@ public class TestEnemy : MonoBehaviour
         Debug.Log("あ！行動をサボった！");
     }
 
-    public void DisplayStatus()
-    {
-        Debug.Log($"エネミーHP:{enemyNowHp.Value}");
-        Debug.Log($"エネミーATK:{EnemyInitialAtk}");
-        Debug.Log($"エネミーDef:{EnemyInitialDef}");
-    }
-    
     public void AttackedEnemy(int playerMonsterAtk)
     {
         int damageReceived = (playerMonsterAtk - enemyNowDef > 0) ? playerMonsterAtk - enemyNowDef : 0;

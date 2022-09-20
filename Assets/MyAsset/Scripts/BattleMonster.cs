@@ -5,33 +5,56 @@ using UnityEngine;
 using UnityEngine.Events;
 using UniRx;
 
-public class TestMonster : MonoBehaviour
+/// <summary>
+/// 
+/// </summary>
+public class BattleMonster : MonoBehaviour
 {
     [SerializeField]
     private Monster monster;
     [SerializeField] 
     private ColorCode colorCode;
     
-    public int MonsterInitialHp { get; set; }
+    private int MonsterInitialHp { get; set; }
     private ReactiveProperty<int> monsterNowHp = new ReactiveProperty<int>();
     
-    public int MonsterInitialAtk { get; set; }
+    private int MonsterInitialAtk { get; set; }
     private int monsterNowAtk;
     
-    public int MonsterInitialDef { get; set; }
+    private int MonsterInitialDef { get; set; }
     private int monsterNowDef;
     
-    public int MonsterInitialMp { get; set; }
+    private int MonsterInitialMp { get; set; }
     private int monsterNowMp;
 
-    [SerializeField]
-    private TestEnemy enemy;
+    private bool diedMonster;
+    
+    private BattleEnemy enemy;
 
     [SerializeField] 
     private TestGameMgr gameMgr;
     
+    private IDisposable subscription;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void TargetEnemy()
+    {
+        enemy = gameMgr.enemy;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
     public void GenerateMonster()
     {
+        
+        if (!(subscription == null))
+        {
+            subscription.Dispose();
+        }
+        
         monster.BuildStatus(colorCode.HexadecimalCenterColor);
         
         Debug.Log($"モンスター倍率:{monster.Buff}");
@@ -42,11 +65,12 @@ public class TestMonster : MonoBehaviour
         
         MonsterInitialHp = (int)(monster.BaseHp * monster.Buff);
         monsterNowHp.Value = MonsterInitialHp;
-        var subscription = monsterNowHp.Subscribe(x => {
+        subscription = monsterNowHp.Subscribe(x => {
             if (monsterNowHp.Value < 0)
             {
-                monsterNowHp.Value = 0;
                 Debug.Log("モンスターは倒れた！");
+                monsterNowHp.Value = 0;
+                diedMonster = false;
             }
         });
         Debug.Log($"モンスターHP:{MonsterInitialHp}");
@@ -62,49 +86,72 @@ public class TestMonster : MonoBehaviour
         MonsterInitialMp = (int)(monster.BaseMp * monster.Buff);
         monsterNowMp = MonsterInitialMp;
         Debug.Log($"モンスターMP:{MonsterInitialMp}");
+
+        diedMonster = false;
         
         Debug.Log("モンスターが生まれたよ！");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="methodName"></param>
     public void RunMonsterCommand(string methodName)
     {
-        StartCoroutine(OnClicked(methodName));
+        StartCoroutine(OnClickedMonsterCommandButton(methodName));
     }
     
-    private IEnumerator OnClicked(string methodName)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="methodName"></param>
+    /// <returns></returns>
+    private IEnumerator OnClickedMonsterCommandButton(string methodName)
     {
-        monsterNowAtk = MonsterInitialAtk;
-        monsterNowDef = MonsterInitialDef;
-        if ("AttackMonster" == methodName)
+        if (gameMgr.isPlayerTurn.Value || !diedMonster)
         {
-            AttackMonster();
-        }
-        else if ("DefendMonster" == methodName)
-        {
-            DefendMonster();
-        }
-        else if ("DisplayStatus" == methodName)
-        {
-            DisplayStatus();
-            yield break;
-        }
+            monsterNowAtk = MonsterInitialAtk;
+            monsterNowDef = MonsterInitialDef;
+            if ("AttackMonster" == methodName)
+            {
+                AttackMonster();
+            }
+            else if ("DefendMonster" == methodName)
+            {
+                DefendMonster();
+            }
+            else if ("DisplayStatus" == methodName)
+            {
+                DisplayStatus();
+                yield break;
+            }
 
-        yield return new WaitForSeconds(2);
-        gameMgr.isPlayerTurn.Value = false;
+            yield return new WaitForSeconds(2);
+            gameMgr.isPlayerTurn.Value = false;
+        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void AttackMonster()
     {
         Debug.Log("モンスターの攻撃！");
         enemy.AttackedEnemy(monsterNowAtk);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void DefendMonster()
     {
         Debug.Log("モンスターの防御！");
         monsterNowDef *= 2;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void DisplayStatus()
     {
         Debug.Log($"モンスターHP:{monsterNowHp.Value}");
@@ -113,6 +160,10 @@ public class TestMonster : MonoBehaviour
         Debug.Log($"モンスターMP:{monsterNowMp}");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="enemyAtk"></param>
     public void AttackedMonster(int enemyAtk)
     {
         int damageReceived = (enemyAtk - monsterNowDef > 0) ? enemyAtk - monsterNowDef : 0;        
