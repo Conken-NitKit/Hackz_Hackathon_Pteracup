@@ -11,14 +11,24 @@ public class GenerateCharacter : MonoBehaviour
 {
     private byte[] bytes;
 
+    [SerializeField]
+    private FadeAnimation fadeAnimation;
+
     /// <summary>
     /// 値を渡す関数
     /// </summary>
     public async void Test()
     {
         var sceneB = await SceneLoader.Load<Main>("Main");
-        Debug.Log(sceneB);
         sceneB.SetArguments(bytes);
+    }
+
+    /// <summary>
+    /// FadeAnimationを動かすための関数
+    /// </summary>
+    public void SetArguments()
+    {
+        fadeAnimation.OnClick();
     }
 
     void Start()
