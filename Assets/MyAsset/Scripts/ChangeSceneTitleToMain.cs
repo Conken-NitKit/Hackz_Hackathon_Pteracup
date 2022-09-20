@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Title‚©‚çmain‚ÉƒV[ƒ“‘JˆÚ‚·‚éƒXƒNƒŠƒvƒg
+/// Titleã‹ã‚‰mainã«ã‚·ãƒ¼ãƒ³é·ç§»ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 /// </summary>
 public class ChangeSceneTitleToMain : MonoBehaviour
 {
