@@ -10,26 +10,21 @@ public class TitleController : MonoBehaviour
 {
 
     [SerializeField]
-    UnityEngine.UI.Text image;
+    UnityEngine.UI.Text titleText;
 
     [SerializeField]
     private float excutionTime = 2;
     [SerializeField]
-    private float positionX = 177;
-    [SerializeField]
-    private float positionY = 307;
-    [SerializeField]
     private float transparency = 1;
     [SerializeField]
-    private float waitTime = 2;
+    private float moveDestance = 10;
 
-    private float positionZ;
+    private float zero = 0;
 
     void Start()
     {
-        this.transform.DOMove(new Vector3(positionX, positionY, positionZ), excutionTime);
-        this.image.DOFade(transparency,excutionTime);
-        positionY += 10;
-        this.transform.DOMove(new Vector3(positionX, positionY, positionZ), excutionTime).SetDelay(waitTime).SetLoops(-1, LoopType.Yoyo);
+        //this.transform.DOLocalMove(new Vector3(positionX, positionY, positionZ), excutionTime);
+        this.titleText.DOFade(transparency,excutionTime);
+        this.transform.DOLocalMove(new Vector3(zero, moveDestance, zero), excutionTime).SetLoops(-1, LoopType.Yoyo).SetRelative(true);
     }
 }
