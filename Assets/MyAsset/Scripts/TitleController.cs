@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 /// <summary>
-/// title‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğ§Œä‚·‚éƒXƒNƒŠƒvƒg
+/// titleã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’åˆ¶å¾¡ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 /// </summary>
 public class TitleController : MonoBehaviour
 {

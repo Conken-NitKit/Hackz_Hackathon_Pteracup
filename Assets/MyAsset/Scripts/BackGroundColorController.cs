@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// TitleScene‚Ì”wŒi‚Æƒ{ƒ^ƒ“Aƒ^ƒCƒgƒ‹‚ÌF‚ğ•ÏX‚·‚éƒXƒNƒŠƒvƒg
+/// TitleSceneã®èƒŒæ™¯ã¨ãƒœã‚¿ãƒ³ã€ã‚¿ã‚¤ãƒˆãƒ«ã®è‰²ã‚’å¤‰æ›´ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 /// </summary>
 public class BackGroundColorController : MonoBehaviour
 {

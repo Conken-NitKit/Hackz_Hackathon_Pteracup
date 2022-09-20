@@ -1,21 +1,21 @@
-using UnityEngine.SceneManagement;
+ï»¿using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
-/// ƒV[ƒ“‚ğƒ[ƒh‚·‚é
-/// ƒ[ƒhæƒV[ƒ“‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ªæ“¾‚Å‚«‚é‚Ì‚Åƒpƒ‰ƒ[ƒ^[‚ğ“n‚¹‚é
-/// æ“¾‚Å‚«‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Íƒ[ƒhæƒV[ƒ“‚Ìƒ‹[ƒgŠK‘w‚ÌGameObject‚Éİ’u‚³‚ê‚Ä‚¢‚é‚à‚Ì
-/// w’èƒRƒ“ƒ|[ƒlƒ“ƒg‚ªæ“¾‚Å‚«‚é‚Ì‚ÍAwake‚ÌŒãAStart‚Ì‘O‚Ìƒ^ƒCƒ~ƒ“ƒO
+/// ã‚·ãƒ¼ãƒ³ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
+/// ãƒ­ãƒ¼ãƒ‰å…ˆã‚·ãƒ¼ãƒ³ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒå–å¾—ã§ãã‚‹ã®ã§ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’æ¸¡ã›ã‚‹
+/// å–å¾—ã§ãã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¯ãƒ­ãƒ¼ãƒ‰å…ˆã‚·ãƒ¼ãƒ³ã®ãƒ«ãƒ¼ãƒˆéšå±¤ã®GameObjectã«è¨­ç½®ã•ã‚Œã¦ã„ã‚‹ã‚‚ã®
+/// æŒ‡å®šã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒå–å¾—ã§ãã‚‹ã®ã¯Awakeã®å¾Œã€Startã®å‰ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°
 /// </summary>
 public static class SceneLoader
 {
     /// <summary>
-    /// ƒ[ƒh‚·‚é
+    /// ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     /// </summary>
-    /// <param name="sceneName">ƒV[ƒ“–¼</param>
-    /// <param name="mode">ƒV[ƒ“ƒ[ƒhƒ‚[ƒh</param>
-    /// <returns>ƒ[ƒhæƒV[ƒ“‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg</returns>
+    /// <param name="sceneName">ã‚·ãƒ¼ãƒ³å</param>
+    /// <param name="mode">ã‚·ãƒ¼ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+    /// <returns>ãƒ­ãƒ¼ãƒ‰å…ˆã‚·ãƒ¼ãƒ³ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ</returns>
     public static UniTask<TComponent> Load<TComponent>(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
         where TComponent : Component
     {
@@ -26,10 +26,10 @@ public static class SceneLoader
 
         void OnSceneLoaded(Scene scene, LoadSceneMode _mode)
         {
-            // ˆê“xƒCƒxƒ“ƒg‚ğó‚¯‚½‚ç•s—v‚È‚Ì‚Å‰ğœ
+            // ä¸€åº¦ã‚¤ãƒ™ãƒ³ãƒˆã‚’å—ã‘ãŸã‚‰ä¸è¦ãªã®ã§è§£é™¤
             SceneManager.sceneLoaded -= OnSceneLoaded;
 
-            // ƒ[ƒh‚µ‚½ƒV[ƒ“‚Ìƒ‹[ƒgŠK‘w‚ÌGameObject‚©‚çw’èƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ1‚Âæ“¾‚·‚é
+            // ãƒ­ãƒ¼ãƒ‰ã—ãŸã‚·ãƒ¼ãƒ³ã®ãƒ«ãƒ¼ãƒˆéšå±¤ã®GameObjectã‹ã‚‰æŒ‡å®šã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’1ã¤å–å¾—ã™ã‚‹
             var target = GetFirstComponent<TComponent>(scene.GetRootGameObjects());
 
             tcs.TrySetResult(target);
@@ -37,21 +37,21 @@ public static class SceneLoader
     }
 
     /// <summary>
-    /// ƒ[ƒh‚·‚é
+    /// ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     /// </summary>
-    /// <param name="sceneName">ƒV[ƒ“–¼</param>
-    /// <param name="mode">ƒV[ƒ“ƒ[ƒhƒ‚[ƒh</param>
+    /// <param name="sceneName">ã‚·ãƒ¼ãƒ³å</param>
+    /// <param name="mode">ã‚·ãƒ¼ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
     public static void Load(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
     {
         SceneManager.LoadScene(sceneName, mode);
     }
 
     /// <summary>
-    /// ”ñ“¯Šúƒ[ƒh‚·‚é
+    /// éåŒæœŸãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     /// </summary>
-    /// <param name="sceneName">ƒV[ƒ“–¼</param>
-    /// <param name="mode">ƒV[ƒ“ƒ[ƒhƒ‚[ƒh</param>
-    /// <returns>ƒ[ƒhæƒV[ƒ“‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg</returns>
+    /// <param name="sceneName">ã‚·ãƒ¼ãƒ³å</param>
+    /// <param name="mode">ã‚·ãƒ¼ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+    /// <returns>ãƒ­ãƒ¼ãƒ‰å…ˆã‚·ãƒ¼ãƒ³ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ</returns>
     public static async UniTask<TComponent> LoadAsync<TComponent>(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
         where TComponent : Component
     {
@@ -63,11 +63,11 @@ public static class SceneLoader
     }
 
     /// <summary>
-    /// GameObject”z—ñ‚©‚çw’è‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ğˆê‚Âæ“¾‚·‚é
+    /// GameObjecté…åˆ—ã‹ã‚‰æŒ‡å®šã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ä¸€ã¤å–å¾—ã™ã‚‹
     /// </summary>
-    /// <typeparam name="TComponent">æ“¾‘ÎÛƒRƒ“ƒ|[ƒlƒ“ƒg</typeparam>
-    /// <param name="gameObjects">GameObject”z—ñ</param>
-    /// <returns>‘ÎÛƒRƒ“ƒ|[ƒlƒ“ƒg</returns>
+    /// <typeparam name="TComponent">å–å¾—å¯¾è±¡ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ</typeparam>
+    /// <param name="gameObjects">GameObjecté…åˆ—</param>
+    /// <returns>å¯¾è±¡ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ</returns>
     private static TComponent GetFirstComponent<TComponent>(GameObject[] gameObjects)
         where TComponent : Component
     {

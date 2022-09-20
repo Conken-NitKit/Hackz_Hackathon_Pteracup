@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
 /// <summary>
-/// text‚ÌF‚ğ•Ï‰»‚³‚¹‚éƒXƒNƒŠƒvƒg
+/// textã®è‰²ã‚’å¤‰åŒ–ã•ã›ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 /// </summary>
 public class TextColorController : MonoBehaviour
 {
@@ -59,7 +59,7 @@ public class TextColorController : MonoBehaviour
     }
 
     /// <summary>
-    /// text‚ÌF‚ğ1•b‚²‚Æ‚É•Ï‰»‚³‚¹‚éƒRƒ‹[ƒ`ƒ“
+    /// textã®è‰²ã‚’1ç§’ã”ã¨ã«å¤‰åŒ–ã•ã›ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³
     /// </summary>
     IEnumerator SwitchColor()
     {
