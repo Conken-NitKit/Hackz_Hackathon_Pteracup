@@ -51,6 +51,15 @@ public class Monster : MonoBehaviour
     [Header("特殊コマンドリスト")] [SerializeField] private BaseCommand[] commands;
     private readonly int[] randNums = new int[] {8,2,7,15,10,0,12,1,13,3,5,11,9,6,14,4};
     [SerializeField] private double MaxDiff;
+
+    public void BuildStatusManual(float buff,int hp,int atk,int def,int mp)
+    {
+        Buff = buff;
+        BaseHp = hp;
+        BaseAtk = atk;
+        BaseDef = def;
+        BaseMp = mp;
+    } 
     
     /// <summary>
     /// 引数として受け取ったカラーコードからステータスを生成するメソッド
