@@ -8,23 +8,13 @@ using UnityEngine;
 /// </summary>
 public class Title : MonoBehaviour
 {
-    /*
+    
     [SerializeField]
     private ImageReference imageReference;
-    */
-    private byte[] bytes;
 
     public async void Test()
     {
-       // bytes = imageReference.bytes;
         var sceneA = await SceneLoader.Load<GenerateCharacter>("GenerateCharacter");
-        sceneA.SetArguments(bytes);
+        sceneA.SetArguments(imageReference.bytes);
     }
-
-    void Start()
-    {
-
-    }
-
-
 }
