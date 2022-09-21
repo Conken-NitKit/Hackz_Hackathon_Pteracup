@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 /// </summary>
 public class Main : MonoBehaviour
 {
-
     private byte[] bytes;
 
     [SerializeField] 
@@ -43,6 +42,6 @@ public class Main : MonoBehaviour
     {
         await Task.Delay(3000);
         var sceneB = await SceneLoader.Load<GameOver>("GameOver");
-        sceneB.SetArguments(battleGameManager.enemyKillNum ,charaName);
+        sceneB.SetArguments(battleGameManager.enemyKillNum - 1,charaName);
     }
 }

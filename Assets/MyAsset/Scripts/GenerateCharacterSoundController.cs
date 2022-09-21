@@ -25,12 +25,7 @@ public class GenerateCharacterSoundController : MonoBehaviour
     {
         StartCoroutine(AudioPlay());
     }
-
-
-    void Update()
-    {
-        
-    }
+    
 
     /// <summary>
     /// 効果音を流した後にBGMを流すスクリプト
@@ -38,10 +33,12 @@ public class GenerateCharacterSoundController : MonoBehaviour
     /// <returns></returns>
     IEnumerator AudioPlay()
     {
+        yield return new WaitForSeconds(3f);
         audioSource.PlayOneShot(sound1, volume);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         audioSource.Stop();
-        audioSource.PlayOneShot(sound2, volume);
+        audioSource.clip = sound2;
+        audioSource.Play();
     }
 
 }

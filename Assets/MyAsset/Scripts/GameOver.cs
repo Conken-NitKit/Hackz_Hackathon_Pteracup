@@ -26,6 +26,6 @@ public class GameOver : MonoBehaviour
         
         charaName = characterName;
         Debug.Log( $"{charaName} : {score}体");
-        scoreText.text = $"敵を倒した数 : {enemyKillScore}体";
+        scoreText.text = $"敵を倒した数 : {score}体";
     }
 }
