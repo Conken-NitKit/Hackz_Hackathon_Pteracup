@@ -15,6 +15,10 @@ public class InputFieldController : MonoBehaviour
     [SerializeField]
     private Text text;
 
+    [SerializeField]
+    private SwitchMainSceneButtonController switchMainSceneButtonController;
+
+
     void Start()
     {
         inputField = inputField.GetComponent<InputField>();
@@ -23,6 +27,14 @@ public class InputFieldController : MonoBehaviour
 
     public void InputText()
     {
+        if(inputField.text.Length > 0)
+        {
+            switchMainSceneButtonController.FadeIn();
+        }
+        else if(inputField.text.Length == 0)
+        {
+            switchMainSceneButtonController.FadeOut();
+        }
         text.text = inputField.text;
     }
 

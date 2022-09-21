@@ -9,6 +9,8 @@ public class ImageReference : MonoBehaviour
 {
     [SerializeField] private RawImage rawImage;
     [SerializeField] private ColorCode colorCode;
+
+    public byte[] bytes { get; private set;}
     
     void Start()
     {
@@ -17,7 +19,7 @@ public class ImageReference : MonoBehaviour
     }
 
     void onSuccess(string[] paths) {
-        byte[] bytes = File.ReadAllBytes(paths[0]);
+        bytes = File.ReadAllBytes(paths[0]);
         Texture2D texture = new Texture2D(200, 200);
         texture.filterMode = FilterMode.Trilinear;
         texture.LoadImage(bytes);

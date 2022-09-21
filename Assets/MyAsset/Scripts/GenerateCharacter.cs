@@ -26,9 +26,10 @@ public class GenerateCharacter : MonoBehaviour
     /// <summary>
     /// FadeAnimationを動かすための関数
     /// </summary>
-    public void SetArguments()
+    public void SetArguments(byte[] date)
     {
         fadeAnimation.OnClick();
+        bytes = date;
     }
 
     void Start()

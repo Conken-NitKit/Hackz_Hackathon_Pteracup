@@ -7,13 +7,16 @@ using UnityEngine;
 /// </summary>
 public class Main : MonoBehaviour
 {
+
+    private byte[] bytes;
+
     /// <summary>
     /// 値をもらう関数
     /// </summary>
     /// <param name="bytes"></param>
-    public void SetArguments(byte[] bytes)
+    public void SetArguments(byte[] date)
     {
-        Debug.Log(bytes);
+        bytes = date;
     }
 
     void Start()

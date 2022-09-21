@@ -1,18 +1,24 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// TitleScene‚©‚çGenerateCharacterScene‚Ö‚ÌƒV[ƒ“‘JˆÚ‚ÌƒXƒNƒŠƒvƒg
-/// ‘JˆÚæ‚É‚ ‚éæ“¾‚·‚éƒXƒNƒŠƒvƒg‚ÍGameObject‚ÉƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚È‚¢‚Æ“®ì‚µ‚È‚¢
+/// TitleSceneã‹ã‚‰GenerateCharacterSceneã¸ã®ã‚·ãƒ¼ãƒ³é·ç§»ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+/// é·ç§»å…ˆã«ã‚ã‚‹å–å¾—ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¯GameObjectã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ãªã„ã¨å‹•ä½œã—ãªã„
 /// </summary>
 public class Title : MonoBehaviour
 {
+    /*
+    [SerializeField]
+    private ImageReference imageReference;
+    */
+    private byte[] bytes;
 
     public async void Test()
     {
+       // bytes = imageReference.bytes;
         var sceneA = await SceneLoader.Load<GenerateCharacter>("GenerateCharacter");
-        sceneA.SetArguments();
+        sceneA.SetArguments(bytes);
     }
 
     void Start()
