@@ -14,8 +14,6 @@ public class ImageReference : MonoBehaviour
     public byte[] bytes { get; private set;}
 
     [SerializeField] 
-    private RawImage rawImage;
-    [SerializeField] 
     private ColorCode colorCode;
     
     void Start()
