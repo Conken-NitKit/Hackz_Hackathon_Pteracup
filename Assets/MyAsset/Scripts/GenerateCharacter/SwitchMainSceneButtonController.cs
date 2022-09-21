@@ -17,12 +17,7 @@ public class SwitchMainSceneButtonController : MonoBehaviour
 
     private float positionZ = 0;
     private float zero = 0;
-
-    void Start()
-    {
-        
-    }
-
+    
     public void FadeIn()
     {
         this.transform.DOLocalMove(new Vector3(positionX, positionY, positionZ), excutionTime);

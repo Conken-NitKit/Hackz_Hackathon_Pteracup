@@ -61,7 +61,7 @@ public class FadeAnimation : MonoBehaviour
 		{
 			fade.FadeOut(1);
 		});
-		StartCoroutine("FadeInParameter");
+		StartCoroutine(FadeInParameter());
 	}
 
 	IEnumerator FadeInParameter()

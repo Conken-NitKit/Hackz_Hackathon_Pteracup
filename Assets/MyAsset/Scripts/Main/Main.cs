@@ -22,14 +22,7 @@ public class Main : MonoBehaviour
     /// <param name="SpacialCommand"></param>
     public void SetArguments(string colorCode,string characterName, Monster monster)
     {
-        Debug.Log(colorCode);
-        Debug.Log(characterName);
-        Debug.Log(monster.BaseHp);
-    }
 
-    void Start()
-    {
-        
     }
 
 }
