@@ -60,7 +60,6 @@ public class BattleGameManager : MonoBehaviour
             else
             {
                 gameText.text = "エネミーターン！";
-                buttonBlockPanel.SetActive(true);
                 enemy.StartCoroutine(enemy.RunEnemyCommand());
             }
         });

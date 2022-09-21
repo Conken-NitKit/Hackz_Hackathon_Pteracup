@@ -38,7 +38,13 @@ public class BattleEnemy : MonoBehaviour
     
     [SerializeField]
     private Text gameText;
-    
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField] 
+    private Sprite[] enemySprites;
+
     /// <summary>
     /// エネミーのステータスを生成するメソッド
     /// </summary>
@@ -77,7 +83,20 @@ public class BattleEnemy : MonoBehaviour
         enemyNowDef = EnemyInitialDef;
         Debug.Log($"エネミーDef:{EnemyInitialDef}");
 
-        this.transform.DOMoveX(-4f, 1).SetDelay(5f).SetEase(Ease.OutBack);
+        if (EnemyInitialHp + EnemyInitialAtk + EnemyInitialDef < 40)
+        {
+            spriteRenderer.sprite = enemySprites[0];
+        }
+        else if (EnemyInitialHp + EnemyInitialAtk + EnemyInitialDef < 55)
+        {
+            spriteRenderer.sprite = enemySprites[1];
+        }
+        else
+        {
+            spriteRenderer.sprite = enemySprites[2];
+        }
+
+        this.transform.DOMoveX(-4f, 1).SetDelay(6f).SetEase(Ease.OutBack);
     }
 
     /// <summary>

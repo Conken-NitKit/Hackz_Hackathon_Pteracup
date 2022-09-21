@@ -24,6 +24,9 @@ public class BattleMonster : MonoBehaviour
 
     private bool diedMonster;
     
+    [SerializeField] 
+    private GameObject buttonBlockPanel;
+    
     private BattleEnemy enemy;
 
     [SerializeField] 
@@ -138,6 +141,8 @@ public class BattleMonster : MonoBehaviour
                 DisplayStatus();
                 yield break;
             }
+            
+            buttonBlockPanel.SetActive(true);
 
             yield return new WaitForSeconds(2);
             gameMgr.isPlayerTurn.Value = false;
