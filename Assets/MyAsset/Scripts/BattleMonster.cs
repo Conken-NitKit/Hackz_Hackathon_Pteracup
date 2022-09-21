@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 using UniRx;
 
 /// <summary>
-/// 
+/// 戦うモンスター（シャンクス）のステータス受け取り、コマンドのクラス
 /// </summary>
 public class BattleMonster : MonoBehaviour
 {
@@ -32,12 +32,15 @@ public class BattleMonster : MonoBehaviour
     private BattleEnemy enemy;
 
     [SerializeField] 
-    private TestGameMgr gameMgr;
+    private BattleGameManager gameMgr;
     
     private IDisposable subscription;
+    
+    [SerializeField]
+    private Text gameText;
 
     /// <summary>
-    /// 
+    /// 新しい敵が現れた時に、新しい敵のBattleEnemyコンポーネントを代入する
     /// </summary>
     public void TargetEnemy()
     {
@@ -45,67 +48,58 @@ public class BattleMonster : MonoBehaviour
     }
     
     /// <summary>
-    /// 
+    /// モンスターのステータスを決定するクラス
+    /// 他クラスで決定された基礎ステータスからバフ等を掛けて実際にバトルするエネミーを生成
     /// </summary>
-    public void GenerateMonster()
+    public void DecideMonsterStatus()
     {
-        
-        if (!(subscription == null))
+        if (subscription != null)
         {
             subscription.Dispose();
         }
-        
+
         monster.BuildStatus(colorCode.HexadecimalCenterColor);
         
-        Debug.Log($"モンスター倍率:{monster.Buff}");
-        Debug.Log($"モンスター基本HP:{monster.BaseHp}");
-        Debug.Log($"モンスター基本Atk:{monster.BaseAtk}");
-        Debug.Log($"モンスター基本Def:{monster.BaseDef}");
-        Debug.Log($"モンスター基本MP:{monster.BaseMp}");
+        Debug.Log($"シャンクス倍率:{monster.Buff}");
+        Debug.Log($"シャンクス基本HP:{monster.BaseHp}");
+        Debug.Log($"シャンクス基本Atk:{monster.BaseAtk}");
+        Debug.Log($"シャンクス基本Def:{monster.BaseDef}");
+        Debug.Log($"シャンクス基本MP:{monster.BaseMp}");
         
         MonsterInitialHp = (int)(monster.BaseHp * monster.Buff);
         monsterNowHp.Value = MonsterInitialHp;
         subscription = monsterNowHp.Subscribe(x => {
             if (monsterNowHp.Value < 0)
             {
-                Debug.Log("モンスターは倒れた！");
+                gameText.text = "シャンクスは倒れた！";
                 monsterNowHp.Value = 0;
                 diedMonster = false;
             }
         });
-        Debug.Log($"モンスターHP:{MonsterInitialHp}");
 
         MonsterInitialAtk = (int)(monster.BaseAtk * monster.Buff);
         monsterNowAtk = MonsterInitialAtk;
-        Debug.Log($"モンスターAtk:{MonsterInitialAtk}");
 
         MonsterInitialDef = (int)(monster.BaseDef * monster.Buff);
         monsterNowDef = MonsterInitialDef;
-        Debug.Log($"モンスターDef:{MonsterInitialDef}");
 
         MonsterInitialMp = (int)(monster.BaseMp * monster.Buff);
         monsterNowMp = MonsterInitialMp;
-        Debug.Log($"モンスターMP:{MonsterInitialMp}");
 
         diedMonster = false;
-        
-        Debug.Log("モンスターが生まれたよ！");
     }
 
     /// <summary>
-    /// 
+    /// 外部からOnClickedMonsterCommandButtonを呼び出すときに使う
     /// </summary>
-    /// <param name="methodName"></param>
     public void RunMonsterCommand(string methodName)
     {
         StartCoroutine(OnClickedMonsterCommandButton(methodName));
     }
     
     /// <summary>
-    /// 
+    /// 引数でコマンドメソッドの名前を指定することで実行するメソッド
     /// </summary>
-    /// <param name="methodName"></param>
-    /// <returns></returns>
     private IEnumerator OnClickedMonsterCommandButton(string methodName)
     {
         if (gameMgr.isPlayerTurn.Value || !diedMonster)
@@ -132,42 +126,42 @@ public class BattleMonster : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// シャンクスの攻撃
     /// </summary>
     private void AttackMonster()
     {
-        Debug.Log("モンスターの攻撃！");
+        gameText.text =  "シャンクスの攻撃！";
         enemy.AttackedEnemy(monsterNowAtk);
     }
 
     /// <summary>
-    /// 
+    /// シャンクスの防御
     /// </summary>
     private void DefendMonster()
     {
-        Debug.Log("モンスターの防御！");
+        gameText.text = "シャンクスの防御！";
         monsterNowDef *= 2;
     }
 
     /// <summary>
-    /// 
+    /// シャンクスのステータスの一覧を表示するメソッド
     /// </summary>
     private void DisplayStatus()
     {
-        Debug.Log($"モンスターHP:{monsterNowHp.Value}");
-        Debug.Log($"モンスターAtk:{monsterNowAtk}");
-        Debug.Log($"モンスターDef:{monsterNowDef}");
-        Debug.Log($"モンスターMP:{monsterNowMp}");
+        Debug.Log($"シャンクスHP:{monsterNowHp.Value}");
+        Debug.Log($"シャンクスAtk:{monsterNowAtk}");
+        Debug.Log($"シャンクスDef:{monsterNowDef}");
+        Debug.Log($"シャンクスMP:{monsterNowMp}");
     }
 
     /// <summary>
-    /// 
+    /// 攻撃された時、このメソッドを呼び出して自分のhpを減らす
     /// </summary>
     /// <param name="enemyAtk"></param>
     public void AttackedMonster(int enemyAtk)
     {
         int damageReceived = (enemyAtk - monsterNowDef > 0) ? enemyAtk - monsterNowDef : 0;        
-        Debug.Log($"モンスターは{damageReceived}ダメージ受けた！");
+        gameText.text = $"シャンクスは{damageReceived}ダメージ受けた！";
         monsterNowHp.Value -= damageReceived;
     }
 }
