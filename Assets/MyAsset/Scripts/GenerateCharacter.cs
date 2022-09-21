@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
+using System.IO;
+using SimpleFileBrowser;
+using UnityEngine.UI;
+
 
 /// <summary>
 /// bytesの値をMainSceneのMain.csに渡すスクリプト
@@ -13,6 +17,18 @@ public class GenerateCharacter : MonoBehaviour
 
     [SerializeField]
     private FadeAnimation fadeAnimation;
+    /*
+    [SerializeField]
+    private RawImage rawImage;
+    [SerializeField]
+    private ColorCode colorCode;
+    */
+    [SerializeField]
+    private Monster monster;
+
+    [SerializeField]
+    private Text inputFieldText;
+
 
     /// <summary>
     /// 値を渡す関数
@@ -20,7 +36,8 @@ public class GenerateCharacter : MonoBehaviour
     public async void Test()
     {
         var sceneB = await SceneLoader.Load<Main>("Main");
-        sceneB.SetArguments(bytes);
+        //sceneB.SetArguments(colorCode.HexadecimalCenterColor,inputFieldText.text, monster);
+        sceneB.SetArguments("#FF0000",inputFieldText.text, monster);
     }
 
     /// <summary>
@@ -28,8 +45,17 @@ public class GenerateCharacter : MonoBehaviour
     /// </summary>
     public void SetArguments(byte[] date)
     {
-        fadeAnimation.OnClick();
+        /*
         bytes = date;
+        Texture2D texture = new Texture2D(200, 200);
+        texture.filterMode = FilterMode.Trilinear;
+        texture.LoadImage(bytes);
+
+        rawImage.texture = texture;
+        colorCode.Tex = texture;
+        colorCode.StartCoroutine(colorCode.GetCenterColor());
+        */
+        fadeAnimation.Fade();
     }
 
     void Start()

@@ -440,6 +440,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeAnimation: {fileID: 529302130}
+  rawImage: {fileID: 0}
+  colorCode: {fileID: 0}
+  monster: {fileID: 1863128998}
+  inputFieldText: {fileID: 1830217299}
 --- !u!4 &370300740
 Transform:
   m_ObjectHideFlags: 0
@@ -1318,6 +1322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterText: {fileID: 1809756204}
   monster: {fileID: 1863128998}
+  colorCode: {fileID: 0}
 --- !u!1 &1830217297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,6 +1446,7 @@ MonoBehaviour:
     rgba: 0
   <SpacialCommand>k__BackingField: {fileID: 0}
   commands: []
+  MaxDiff: 0
 --- !u!4 &1863128999
 Transform:
   m_ObjectHideFlags: 0

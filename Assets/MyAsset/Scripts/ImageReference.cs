@@ -30,13 +30,6 @@ public class ImageReference : MonoBehaviour
     /// <param name="paths"></param>
     void onSuccess(string[] paths) {
         bytes = File.ReadAllBytes(paths[0]);
-        Texture2D texture = new Texture2D(200, 200);
-        texture.filterMode = FilterMode.Trilinear;
-        texture.LoadImage(bytes);
-
-        rawImage.texture = texture;
-        colorCode.Tex = texture;
-        colorCode.StartCoroutine(colorCode.GetCenterColor());
     }
     
     /// <summary>

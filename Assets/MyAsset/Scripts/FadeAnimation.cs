@@ -40,11 +40,11 @@ public class FadeAnimation : MonoBehaviour
 	private float positionZ = 0;
 	private float fadeValue = 1;
 
-	private string akagami = "FFFFFF";
+	private string akagami;
 
 
 
-	public void OnClick()
+	public void Fade()
 	{
 		fade.FadeIn(2, () =>
 		{
@@ -63,6 +63,7 @@ public class FadeAnimation : MonoBehaviour
 		texture.LoadImage(bytes);
 
 		rawImage.texture = texture;
+		akagami = colorCode.HexadecimalCenterColor;
 		*/
 		yield return new WaitForSeconds(excutionTime);
 
