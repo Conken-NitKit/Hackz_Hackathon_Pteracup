@@ -25,7 +25,7 @@ public class BattleMonster : MonoBehaviour
     private int monsterNowDef;
     
     private int MonsterInitialMp { get; set; }
-    private int monsterNowMp;
+    private ReactiveProperty<int> monsterNowMp = new ReactiveProperty<int>();
 
     private bool diedMonster;
     
@@ -34,10 +34,14 @@ public class BattleMonster : MonoBehaviour
     [SerializeField] 
     private BattleGameManager gameMgr;
     
-    private IDisposable subscription;
+    private IDisposable subscriptionHp;
+    private IDisposable subscriptionMp;
     
     [SerializeField]
     private Text gameText;
+    
+    [SerializeField]
+    private Text hpText;
 
     /// <summary>
     /// 新しい敵が現れた時に、新しい敵のBattleEnemyコンポーネントを代入する
@@ -53,9 +57,14 @@ public class BattleMonster : MonoBehaviour
     /// </summary>
     public void DecideMonsterStatus()
     {
-        if (subscription != null)
+        if (subscriptionHp != null)
         {
-            subscription.Dispose();
+            subscriptionHp.Dispose();
+        }
+
+        if (subscriptionMp != null)
+        {
+            subscriptionMp.Dispose();
         }
 
         monster.BuildStatus(colorCode.HexadecimalCenterColor);
@@ -68,13 +77,19 @@ public class BattleMonster : MonoBehaviour
         
         MonsterInitialHp = (int)(monster.BaseHp * monster.Buff);
         monsterNowHp.Value = MonsterInitialHp;
-        subscription = monsterNowHp.Subscribe(x => {
+        subscriptionHp = monsterNowHp.Subscribe(x => {
             if (monsterNowHp.Value < 0)
             {
                 gameText.text = "シャンクスは倒れた！";
                 monsterNowHp.Value = 0;
                 diedMonster = false;
             }
+
+            hpText.text = $"{monsterNowHp.Value}";
+        });
+        
+        subscriptionMp = monsterNowMp.Subscribe(x => {
+            hpText.text = $"{monsterNowMp.Value}";
         });
 
         MonsterInitialAtk = (int)(monster.BaseAtk * monster.Buff);
@@ -84,7 +99,7 @@ public class BattleMonster : MonoBehaviour
         monsterNowDef = MonsterInitialDef;
 
         MonsterInitialMp = (int)(monster.BaseMp * monster.Buff);
-        monsterNowMp = MonsterInitialMp;
+        monsterNowMp.Value = MonsterInitialMp;
 
         diedMonster = false;
     }
