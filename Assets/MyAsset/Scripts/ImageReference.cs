@@ -10,6 +10,9 @@ using UnityEngine.UI;
 /// </summary>
 public class ImageReference : MonoBehaviour
 {
+
+    public byte[] bytes { get; private set;}
+
     [SerializeField] 
     private RawImage rawImage;
     [SerializeField] 
@@ -26,14 +29,7 @@ public class ImageReference : MonoBehaviour
     /// </summary>
     /// <param name="paths"></param>
     void onSuccess(string[] paths) {
-        byte[] bytes = File.ReadAllBytes(paths[0]);
-        Texture2D texture = new Texture2D(200, 200);
-        texture.filterMode = FilterMode.Trilinear;
-        texture.LoadImage(bytes);
-
-        rawImage.texture = texture;
-        colorCode.Tex = texture;
-        colorCode.StartCoroutine(colorCode.GetCenterColor());
+        bytes = File.ReadAllBytes(paths[0]);
     }
     
     /// <summary>
