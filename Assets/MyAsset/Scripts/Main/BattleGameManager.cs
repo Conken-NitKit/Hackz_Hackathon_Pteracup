@@ -26,13 +26,11 @@ public class BattleGameManager : MonoBehaviour
     [SerializeField]
     private Text gameText;
 
-    private int enemyKillNum;
+    [SerializeField] 
+    private GameObject buttonBlockPanel;
 
-    private void Start()
-    {
-        GoNextStage();
-    }
-
+    public int enemyKillNum{ get; private set; }
+    
     /// <summary>
     /// 敵が倒れた時、次のバトルの準備をするメソッド
     /// </summary>
@@ -43,7 +41,7 @@ public class BattleGameManager : MonoBehaviour
             subscription.Dispose();
         }
         
-        enemyObject = Instantiate(baseEnemy,new Vector3( -1.0f, 0.0f, 0.0f), Quaternion.identity);
+        enemyObject = Instantiate(baseEnemy,new Vector3( -10f, 1.6f, 0.0f), Quaternion.identity);
         enemy = enemyObject.GetComponent<BattleEnemy>();
         enemy.BuildEnemyStats();
         
@@ -57,6 +55,7 @@ public class BattleGameManager : MonoBehaviour
             if (isPlayerTurn.Value)
             {
                 gameText.text = "プレイヤーターン！";
+                buttonBlockPanel.SetActive(false);
             }
             else
             {

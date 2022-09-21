@@ -10,24 +10,22 @@ using UniRx;
 /// </summary>
 public class BattleMonster : MonoBehaviour
 {
-    [SerializeField]
-    private Monster monster;
-    [SerializeField] 
-    private ColorCode colorCode;
-    
-    private int MonsterInitialHp { get; set; }
+    private int monsterInitialHp;
     private ReactiveProperty<int> monsterNowHp = new ReactiveProperty<int>();
-    
-    private int MonsterInitialAtk { get; set; }
+
+    private int monsterInitialAtk;
     private int monsterNowAtk;
-    
-    private int MonsterInitialDef { get; set; }
+
+    private int monsterInitialDef;
     private int monsterNowDef;
-    
-    private int MonsterInitialMp { get; set; }
+
+    private int monsterInitialMp;
     private ReactiveProperty<int> monsterNowMp = new ReactiveProperty<int>();
 
     private bool diedMonster;
+    
+    [SerializeField] 
+    private GameObject buttonBlockPanel;
     
     private BattleEnemy enemy;
 
@@ -36,12 +34,21 @@ public class BattleMonster : MonoBehaviour
     
     private IDisposable subscriptionHp;
     private IDisposable subscriptionMp;
+
+    [SerializeField]
+    private SceneAnimation sceneAnimation;
     
     [SerializeField]
     private Text gameText;
     
     [SerializeField]
     private Text hpText;
+    
+    [SerializeField]
+    private Text mpText;
+
+    [SerializeField]
+    private Main main;
 
     /// <summary>
     /// 新しい敵が現れた時に、新しい敵のBattleEnemyコンポーネントを代入する
@@ -55,7 +62,7 @@ public class BattleMonster : MonoBehaviour
     /// モンスターのステータスを決定するクラス
     /// 他クラスで決定された基礎ステータスからバフ等を掛けて実際にバトルするエネミーを生成
     /// </summary>
-    public void DecideMonsterStatus()
+    public void DecideMonsterStatus(Monster monster)
     {
         if (subscriptionHp != null)
         {
@@ -67,21 +74,21 @@ public class BattleMonster : MonoBehaviour
             subscriptionMp.Dispose();
         }
 
-        monster.BuildStatus(colorCode.HexadecimalCenterColor);
-        
         Debug.Log($"シャンクス倍率:{monster.Buff}");
         Debug.Log($"シャンクス基本HP:{monster.BaseHp}");
         Debug.Log($"シャンクス基本Atk:{monster.BaseAtk}");
         Debug.Log($"シャンクス基本Def:{monster.BaseDef}");
         Debug.Log($"シャンクス基本MP:{monster.BaseMp}");
         
-        MonsterInitialHp = (int)(monster.BaseHp * monster.Buff);
-        monsterNowHp.Value = MonsterInitialHp;
+        monsterInitialHp = (int)(monster.BaseHp * monster.Buff);
+        monsterNowHp.Value = monsterInitialHp;
         subscriptionHp = monsterNowHp.Subscribe(x => {
-            if (monsterNowHp.Value < 0)
+            if (monsterNowHp.Value <= 0)
             {
                 gameText.text = "シャンクスは倒れた！";
                 monsterNowHp.Value = 0;
+                sceneAnimation.RiseCurtain();
+                main.PassMainToGameOver();
                 diedMonster = false;
             }
 
@@ -89,17 +96,17 @@ public class BattleMonster : MonoBehaviour
         });
         
         subscriptionMp = monsterNowMp.Subscribe(x => {
-            hpText.text = $"{monsterNowMp.Value}";
+            mpText.text = $"{monsterNowMp.Value}";
         });
 
-        MonsterInitialAtk = (int)(monster.BaseAtk * monster.Buff);
-        monsterNowAtk = MonsterInitialAtk;
+        monsterInitialAtk = (int)(monster.BaseAtk * monster.Buff);
+        monsterNowAtk = monsterInitialAtk;
 
-        MonsterInitialDef = (int)(monster.BaseDef * monster.Buff);
-        monsterNowDef = MonsterInitialDef;
+        monsterInitialDef = (int)(monster.BaseDef * monster.Buff);
+        monsterNowDef = monsterInitialDef;
 
-        MonsterInitialMp = (int)(monster.BaseMp * monster.Buff);
-        monsterNowMp.Value = MonsterInitialMp;
+        monsterInitialMp = (int)(monster.BaseMp * monster.Buff);
+        monsterNowMp.Value = monsterInitialMp;
 
         diedMonster = false;
     }
@@ -119,8 +126,8 @@ public class BattleMonster : MonoBehaviour
     {
         if (gameMgr.isPlayerTurn.Value || !diedMonster)
         {
-            monsterNowAtk = MonsterInitialAtk;
-            monsterNowDef = MonsterInitialDef;
+            monsterNowAtk = monsterInitialAtk;
+            monsterNowDef = monsterInitialDef;
             if ("AttackMonster" == methodName)
             {
                 AttackMonster();
@@ -134,6 +141,8 @@ public class BattleMonster : MonoBehaviour
                 DisplayStatus();
                 yield break;
             }
+            
+            buttonBlockPanel.SetActive(true);
 
             yield return new WaitForSeconds(2);
             gameMgr.isPlayerTurn.Value = false;
@@ -178,5 +187,13 @@ public class BattleMonster : MonoBehaviour
         int damageReceived = (enemyAtk - monsterNowDef > 0) ? enemyAtk - monsterNowDef : 0;        
         gameText.text = $"シャンクスは{damageReceived}ダメージ受けた！";
         monsterNowHp.Value -= damageReceived;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            monsterNowHp.Value = 0;
+        }
     }
 }

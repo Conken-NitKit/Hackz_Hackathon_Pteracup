@@ -24,7 +24,7 @@ public class InputFieldController : MonoBehaviour
         {
             switchMainSceneButtonController.FadeIn();
         }
-        else if(inputField.text.Length == 0)
+        else
         {
             switchMainSceneButtonController.FadeOut();
         }

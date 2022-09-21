@@ -21,12 +21,6 @@ public class EnemyKillCountDisplay : MonoBehaviour
     private float excutionTime = 2f;
 
     private float enemyKillCountTextPositionZ = 0f;
-    private float killCount = 100;
-
-    void Start()
-    {
-        enemyKillCountText.text = $"敵を倒した数 : {killCount}体";
-    }
 
     /// <summary>
     /// enemyKillCountTextを動かす関数

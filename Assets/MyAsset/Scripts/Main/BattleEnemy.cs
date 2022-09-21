@@ -5,6 +5,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 /// <summary>
 /// 戦闘時のエネミーのステータス、コマンドの管理クラス
@@ -33,9 +34,17 @@ public class BattleEnemy : MonoBehaviour
 
     private IDisposable subscription;
     
+    private SceneAnimation sceneAnimation;
+    
     [SerializeField]
     private Text gameText;
-    
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField] 
+    private Sprite[] enemySprites;
+
     /// <summary>
     /// エネミーのステータスを生成するメソッド
     /// </summary>
@@ -50,6 +59,7 @@ public class BattleEnemy : MonoBehaviour
         
         monster = GameObject.FindWithTag("Monster").GetComponent<BattleMonster>();
         gameMgr = GameObject.FindWithTag("GameManager").GetComponent<BattleGameManager>();
+        sceneAnimation = GameObject.FindWithTag("GameManager").GetComponent<SceneAnimation>();
         
         EnemyInitialHp = Random.Range(hpRange.x, hpRange.y);
         enemyNowHp.Value = EnemyInitialHp;
@@ -59,6 +69,7 @@ public class BattleEnemy : MonoBehaviour
             {
                 enemyNowHp.Value = 0;
                 gameText.text = "エネミーは倒れた！";
+                sceneAnimation.RiseCurtain();
                 gameMgr.GoNextStage();
                 Destroy(this.gameObject);
             }
@@ -71,6 +82,21 @@ public class BattleEnemy : MonoBehaviour
         EnemyInitialDef = Random.Range(defRange.x, defRange.y);
         enemyNowDef = EnemyInitialDef;
         Debug.Log($"エネミーDef:{EnemyInitialDef}");
+
+        if (EnemyInitialHp + EnemyInitialAtk + EnemyInitialDef < 40)
+        {
+            spriteRenderer.sprite = enemySprites[0];
+        }
+        else if (EnemyInitialHp + EnemyInitialAtk + EnemyInitialDef < 55)
+        {
+            spriteRenderer.sprite = enemySprites[1];
+        }
+        else
+        {
+            spriteRenderer.sprite = enemySprites[2];
+        }
+
+        this.transform.DOMoveX(-4f, 1).SetDelay(6f).SetEase(Ease.OutBack);
     }
 
     /// <summary>

@@ -1,22 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
 
 /// <summary>
-/// GameOverScene‚©‚çTitleScene‚É‘JˆÚ‚·‚éƒXƒNƒŠƒvƒg
+/// GameOverSceneï¿½ï¿½ï¿½ï¿½TitleSceneï¿½É‘Jï¿½Ú‚ï¿½ï¿½ï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
 /// </summary>
 public class GameOver : MonoBehaviour
 {
+    private int score;
+    private string charaName;
+
+    [SerializeField] 
+    private Text scoreText;
 
     public async void Switch()
     {
         var sceneC = await SceneLoader.Load<Title>("Title");
     }
-
-    void Start()
+    
+    public void SetArguments(int enemyKillScore,string characterName)
     {
+        score = enemyKillScore;
         
+        charaName = characterName;
+        Debug.Log( $"{charaName} : {score}ä½“");
+        scoreText.text = $"æ•µã‚’å€’ã—ãŸæ•° : {enemyKillScore}ä½“";
     }
 }

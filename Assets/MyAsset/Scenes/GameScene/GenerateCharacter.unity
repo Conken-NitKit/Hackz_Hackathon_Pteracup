@@ -1193,7 +1193,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 370300739}
         m_TargetAssemblyTypeName: GenerateCharacter, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: PassGenerateToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
