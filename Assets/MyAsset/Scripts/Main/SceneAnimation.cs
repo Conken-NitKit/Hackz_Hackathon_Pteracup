@@ -16,7 +16,7 @@ public class SceneAnimation : MonoBehaviour
 
     public void RiseCurtain()
     {
-        curtains.transform.DOMoveY(15f,5f).SetEase(Ease.Linear)
+        curtains.transform.DOMoveY(15f,6f).SetEase(Ease.Linear)
             .OnComplete(() => curtains.transform.position = new Vector3(0, -15f, 0));
     }
 }
