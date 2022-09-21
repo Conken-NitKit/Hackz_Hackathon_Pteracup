@@ -87,7 +87,8 @@ public class Monster : MonoBehaviour
         double[] color32 = new double[] {StatusColor.r, StatusColor.g, StatusColor.b};
         double buffNum = new ColorUtil().CalcColorDifferent(color32,red);
         float minBuff = buffRange.x,maxBuff = buffRange.y;
-        Buff = (100f - (float)buffNum) / 100f * (maxBuff-minBuff) + minBuff;
+        float offset = Math.Abs((100f - (float)buffNum) / 100f * (maxBuff - minBuff));
+        Buff = offset + minBuff;
         //SpacialCommand = commands[rNum[1] % commands.Length];
 
         int seedMaxNum = 15;
@@ -108,7 +109,8 @@ public class Monster : MonoBehaviour
     private int CalcStatus(int value,int seedMax, Vector2Int minMax)
     {
         int min = minMax.x,max = minMax.y;
-        int offset = (int) Math.Round((double) value / (double) seedMax * max-min);
+        int offset = (int) Math.Round((double) value / (double) seedMax * (max-min));
+
         return offset + min;
     }
       
