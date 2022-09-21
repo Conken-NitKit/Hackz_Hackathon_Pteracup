@@ -11,8 +11,6 @@ using UnityEngine.UI;
 public class ImageReference : MonoBehaviour
 {
     [SerializeField] 
-    private RawImage rawImage;
-    [SerializeField] 
     private ColorCode colorCode;
     
     void Start()
@@ -30,8 +28,7 @@ public class ImageReference : MonoBehaviour
         Texture2D texture = new Texture2D(200, 200);
         texture.filterMode = FilterMode.Trilinear;
         texture.LoadImage(bytes);
-
-        rawImage.texture = texture;
+        
         colorCode.Tex = texture;
         colorCode.StartCoroutine(colorCode.GetCenterColor());
     }

@@ -14,6 +14,9 @@ public class ColorCode : MonoBehaviour
     
     public String HexadecimalCenterColor { get; private set; }
 
+    [SerializeField]
+    private MonsterBack monsterBack;
+
     /// <summary>
     /// 画像からカラーコードをとってくる関数
     /// とってくるのは画像のど真ん中の色
@@ -27,6 +30,8 @@ public class ColorCode : MonoBehaviour
 
         centerColor = Tex.GetPixel(Tex.width / 2, Tex.height / 2);
         HexadecimalCenterColor = $"#{ColorUtility.ToHtmlStringRGB(centerColor)}";
+
+        monsterBack.SetMonsterBackColor();
         
         Debug.Log(HexadecimalCenterColor);
     }
