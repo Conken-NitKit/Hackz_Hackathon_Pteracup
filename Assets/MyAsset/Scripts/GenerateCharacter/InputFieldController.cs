@@ -18,13 +18,6 @@ public class InputFieldController : MonoBehaviour
     [SerializeField]
     private SwitchMainSceneButtonController switchMainSceneButtonController;
 
-
-    void Start()
-    {
-        inputField = inputField.GetComponent<InputField>();
-        text = text.GetComponent<Text>();
-    }
-
     public void InputText()
     {
         if(inputField.text.Length > 0)

@@ -10,12 +10,9 @@ using UnityEngine.UI;
 /// </summary>
 public class ImageReference : MonoBehaviour
 {
+    public Texture2D texture{ get; private set;}
+    public byte[] bytes{ get; private set;}
 
-    public byte[] bytes { get; private set;}
-
-    [SerializeField] 
-    private ColorCode colorCode;
-    
     void Start()
     {
         FileBrowser.SetFilters(true, new FileBrowser.Filter("Image Files", ".jpeg", ".png"));

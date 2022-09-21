@@ -16,9 +16,10 @@ public class MonsterBack : MonoBehaviour
 
     public void SetMonsterBackColor()
     {
-        Debug.Log(colorCode.HexadecimalCenterColor);
-        ColorUtility.TryParseHtmlString(colorCode.HexadecimalCenterColor, out color);
-        Debug.Log(color);
+        if (colorCode != null)
+        {
+            ColorUtility.TryParseHtmlString(colorCode.HexadecimalCenterColor, out color);
+        }
         monsterBack.color = color;
     }
 }

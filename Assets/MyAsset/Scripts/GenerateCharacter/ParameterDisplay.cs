@@ -11,19 +11,14 @@ public class ParameterDisplay : MonoBehaviour
 
     [SerializeField]
     private Monster monster;
-    /*
+    
     [SerializeField]
     private ColorCode colorCode;
-    */
-    private string imageColor;
 
-
-
-    void Start()
+    public void DecideStatus()
     {
-        //imageColor = colorCode.HexadecimalCenterColor;
-        monster.BuildStatus("#FF0000");
-        parameterText.text = $"HP : {monster.BaseHp}\nAttack : {monster.BaseAtk}\nDefence : {monster.BaseDef}\nMP : {monster.BaseMp}\n“ÁŽê‹Z : {monster.SpacialCommand}";
+        monster.BuildStatus(colorCode.HexadecimalCenterColor);
+        parameterText.text = $"HP : {monster.BaseHp}\nAttack : {monster.BaseAtk}\nDefence : {monster.BaseDef}\nMP : {monster.BaseMp}\nç‰¹æ®Šã‚³ãƒžãƒ³ãƒ‰ : {monster.SpacialCommand}";
     }
 
 }
