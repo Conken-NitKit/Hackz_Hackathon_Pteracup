@@ -14,12 +14,10 @@ public class MonsterBack : MonoBehaviour
     [SerializeField]
     private Image monsterBack;
 
-    public void SetMonsterBackColor()
+    public void SetMonsterBackColor(string colorName = null)
     {
-        if (colorCode != null)
-        {
-            ColorUtility.TryParseHtmlString(colorCode.HexadecimalCenterColor, out color);
-        }
+        ColorUtility.TryParseHtmlString(colorCode != null ? colorCode.HexadecimalCenterColor : colorName, out color);
+
         monsterBack.color = color;
     }
 }
