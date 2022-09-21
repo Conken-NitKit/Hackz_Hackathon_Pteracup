@@ -1661,7 +1661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce8112b40e54458fbf69ef9bf4c6464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterBack: {fileID: 912648127}
 --- !u!114 &1296164719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,7 +1673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef724ef1172e45e981a40ff7951ace5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorCode: {fileID: 1296164718}
 --- !u!114 &1296164720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2141,7 +2139,7 @@ GameObject:
   - component: {fileID: 1513799316}
   - component: {fileID: 1513799315}
   m_Layer: 5
-  m_Name: Text
+  m_Name: GameMassage
   m_TagString: GameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

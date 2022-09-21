@@ -30,11 +30,10 @@ public class GenerateCharacter : MonoBehaviour
     /// <summary>
     /// 値を渡す関数
     /// </summary>
-    public async void Test()
+    public async void PassGenerateToMain()
     {
         var sceneB = await SceneLoader.Load<Main>("Main");
-        //sceneB.SetArguments(colorCode.HexadecimalCenterColor,inputFieldText.text, monster);
-        sceneB.SetArguments("#FF0000",inputFieldText.text, monster);
+        sceneB.SetArguments(colorCode.HexadecimalCenterColor,inputFieldText.text, monster);
     }
 
     /// <summary>
@@ -48,10 +47,4 @@ public class GenerateCharacter : MonoBehaviour
         colorCode.StartCoroutine(colorCode.GetCenterColor(texture));
         fadeAnimation.Fade();
     }
-
-    void Start()
-    {
-
-    }
-   
 }
