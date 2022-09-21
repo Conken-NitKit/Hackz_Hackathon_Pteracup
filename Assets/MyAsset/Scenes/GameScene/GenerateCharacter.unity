@@ -440,8 +440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeAnimation: {fileID: 529302130}
-  rawImage: {fileID: 0}
-  colorCode: {fileID: 0}
   monster: {fileID: 1863128998}
   inputFieldText: {fileID: 1830217299}
 --- !u!4 &370300740
@@ -1322,7 +1320,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterText: {fileID: 1809756204}
   monster: {fileID: 1863128998}
-  colorCode: {fileID: 0}
 --- !u!1 &1830217297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,7 +1410,7 @@ GameObject:
   - component: {fileID: 1863128999}
   - component: {fileID: 1863128998}
   m_Layer: 0
-  m_Name: 'GameObject '
+  m_Name: HoldMonsterScript
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
