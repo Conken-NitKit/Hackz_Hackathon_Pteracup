@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
 
-public class TestGameMgr : MonoBehaviour
+/// <summary>
+/// 戦闘時のゲーム管理クラス
+/// </summary>
+public class BattleGameManager : MonoBehaviour
 {
     public ReactiveProperty<bool> isPlayerTurn = new ReactiveProperty<bool>(true);
 
@@ -19,11 +23,19 @@ public class TestGameMgr : MonoBehaviour
     
     private IDisposable subscription;
 
+    [SerializeField]
+    private Text gameText;
+
+    private int enemyKillNum;
+
     private void Start()
     {
         GoNextStage();
     }
 
+    /// <summary>
+    /// 敵が倒れた時、次のバトルの準備をするメソッド
+    /// </summary>
     public void GoNextStage()
     {
         if (!(subscription == null))
@@ -36,22 +48,27 @@ public class TestGameMgr : MonoBehaviour
         enemy.BuildEnemyStats();
         
         monster.TargetEnemy();
+
+        enemyKillNum++;
         
-        Debug.Log("次の敵が現れた！");
+        gameText.text = "次の敵が現れた！";
         
         subscription = isPlayerTurn.Subscribe(x => {
             if (isPlayerTurn.Value)
             {
-                Debug.Log("プレイヤーターン！");
+                gameText.text = "プレイヤーターン！";
             }
             else
             {
-                Debug.Log("エネミーターン！");
+                gameText.text = "エネミーターン！";
                 enemy.StartCoroutine(enemy.RunEnemyCommand());
             }
         });
     }
     
+    /// <summary>
+    /// エネミーのステータスを見れるテストクラス
+    /// </summary>
     public void DisplayStatus()
     {
         Debug.Log($"エネミーHP:{enemy.enemyNowHp.Value}");

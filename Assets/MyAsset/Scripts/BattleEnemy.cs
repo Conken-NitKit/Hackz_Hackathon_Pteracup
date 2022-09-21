@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// 戦闘時のエネミーのステータス、コマンドの管理クラス
+/// </summary>
 public class BattleEnemy : MonoBehaviour
 {
     private int EnemyInitialHp { get; set; }
@@ -25,11 +29,16 @@ public class BattleEnemy : MonoBehaviour
     private BattleMonster monster;
     
     [SerializeField] 
-    private TestGameMgr gameMgr;
+    private BattleGameManager gameMgr;
 
     private IDisposable subscription;
     
-
+    [SerializeField]
+    private Text gameText;
+    
+    /// <summary>
+    /// エネミーのステータスを生成するメソッド
+    /// </summary>
     public void BuildEnemyStats()
     {
         if (!(subscription == null))
@@ -37,8 +46,10 @@ public class BattleEnemy : MonoBehaviour
             subscription.Dispose();
         }
         
+        gameText = GameObject.FindWithTag("GameText").GetComponent<Text>();
+        
         monster = GameObject.FindWithTag("Monster").GetComponent<BattleMonster>();
-        gameMgr = GameObject.FindWithTag("GameManager").GetComponent<TestGameMgr>();
+        gameMgr = GameObject.FindWithTag("GameManager").GetComponent<BattleGameManager>();
         
         EnemyInitialHp = Random.Range(hpRange.x, hpRange.y);
         enemyNowHp.Value = EnemyInitialHp;
@@ -47,7 +58,7 @@ public class BattleEnemy : MonoBehaviour
             if (enemyNowHp.Value < 0)
             {
                 enemyNowHp.Value = 0;
-                Debug.Log("エネミーは倒れた！");
+                gameText.text = "エネミーは倒れた！";
                 gameMgr.GoNextStage();
                 Destroy(this.gameObject);
             }
@@ -62,6 +73,11 @@ public class BattleEnemy : MonoBehaviour
         Debug.Log($"エネミーDef:{EnemyInitialDef}");
     }
 
+    /// <summary>
+    /// エネミーのコマンド実行するクラス
+    /// ランダム
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator RunEnemyCommand()
     {
         yield return new WaitForSeconds(2);
@@ -96,39 +112,58 @@ public class BattleEnemy : MonoBehaviour
         gameMgr.isPlayerTurn.Value = true;
     }
 
+    /// <summary>
+    /// エネミーの攻撃メソッド
+    /// </summary>
     private void AttackEnemy()
     {
-        Debug.Log("エネミーの攻撃！");
+        gameText.text = "エネミーの攻撃！";
         monster.AttackedMonster(enemyNowAtk);
     }
 
+    /// <summary>
+    /// エネミーの防御メソッド
+    /// </summary>
     private void DefendEnemy()
     {        
-        Debug.Log("エネミーの防御！");
+        gameText.text = "エネミーの防御！";
         enemyNowDef *= 2;
     }
 
+    /// <summary>
+    /// エネミーの力を貯めるメソッド
+    /// </summary>
     private void AccumulateEnemyAtk()
     {
-        Debug.Log("エネミーは攻撃を貯めた");
+        gameText.text = "エネミーは攻撃を貯めた！";
         enemyNowAtk *= 2;
     }
 
+    /// <summary>
+    /// エネミーの回復メソッド
+    /// </summary>
     private void RecoverEnemyHp()
     {
-        Debug.Log("エネミーの回復！！");
+        gameText.text = "エネミーの回復！！";
         enemyNowHp.Value += 10;
     }
 
+    /// <summary>
+    /// エネミーが何にも行動しないメソッド
+    /// </summary>
     private void DoNothingEnemy()
     {
-        Debug.Log("あ！行動をサボった！");
+        gameText.text = "あ！行動をサボった！";
     }
 
+    /// <summary>
+    /// エネミーが攻撃を受ける時、このメソッドを呼び出して、HPを減らす
+    /// </summary>
+    /// <param name="playerMonsterAtk"></param>
     public void AttackedEnemy(int playerMonsterAtk)
     {
         int damageReceived = (playerMonsterAtk - enemyNowDef > 0) ? playerMonsterAtk - enemyNowDef : 0;
-        Debug.Log($"エネミーは{damageReceived}ダメージ受けた！");
+        gameText.text = $"エネミーは{damageReceived}ダメージ受けた！";
         enemyNowHp.Value -= damageReceived;
     }
 }
