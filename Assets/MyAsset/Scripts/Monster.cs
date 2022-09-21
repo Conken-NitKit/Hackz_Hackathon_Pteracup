@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEditor;
 using GD.MinMaxSlider;
-using UnityEngine.Serialization;
-
+using MyAsset.Scripts.DevUtil;
 /// <summary>
 /// モンスターの基礎ステータスを管理するクラス
 /// </summary>
@@ -54,6 +50,16 @@ public class Monster : MonoBehaviour
 
     [Header("特殊コマンドリスト")] [SerializeField] private BaseCommand[] commands;
     private readonly int[] randNums = new int[] {8,2,7,15,10,0,12,1,13,3,5,11,9,6,14,4};
+    [SerializeField] private double MaxDiff;
+
+    public void BuildStatusManual(float buff,int hp,int atk,int def,int mp)
+    {
+        Buff = buff;
+        BaseHp = hp;
+        BaseAtk = atk;
+        BaseDef = def;
+        BaseMp = mp;
+    } 
     
     /// <summary>
     /// 引数として受け取ったカラーコードからステータスを生成するメソッド
@@ -77,9 +83,12 @@ public class Monster : MonoBehaviour
         int[] gNum = HexToIntArray(colorCode.Substring(2, 2));
         int[] bNum = HexToIntArray(colorCode.Substring(4, 2));
         
+        double[] red = new double[] {255, 0, 0};
+        double[] color32 = new double[] {StatusColor.r, StatusColor.g, StatusColor.b};
+        double buffNum = new ColorUtil().CalcColorDifferent(color32,red);
         float minBuff = buffRange.x,maxBuff = buffRange.y;
-        Buff = rNum[0] / 15f * maxBuff + minBuff;
-        SpacialCommand = commands[rNum[1] % commands.Length];
+        Buff = (100f - (float)buffNum) / 100f * (maxBuff-minBuff) + minBuff;
+        //SpacialCommand = commands[rNum[1] % commands.Length];
 
         int seedMaxNum = 15;
         BaseHp = CalcStatus(randNums[gNum[0]], seedMaxNum, hpRange);
@@ -93,7 +102,8 @@ public class Monster : MonoBehaviour
     /// </summary>
     /// <param name="value">個体値を決定する数字</param>
     /// <param name="seedMax">個体値の最大値 基本的には15をとる</param>
-    /// <param name="minMax">最小最大値を管理するVector2Int</param>
+    /// <param name="minMax">最
+    /// 小最大値を管理するVector2Int</param>
     /// <returns></returns>
     private int CalcStatus(int value,int seedMax, Vector2Int minMax)
     {
@@ -101,7 +111,7 @@ public class Monster : MonoBehaviour
         int offset = (int) Math.Round((double) value / (double) seedMax * max-min);
         return offset + min;
     }
-    
+      
     /// <summary>
     /// 16進数文字列を1文字ごとにintに変換しint型の配列で返す関数
     /// </summary>
@@ -110,10 +120,11 @@ public class Monster : MonoBehaviour
     private int[] HexToIntArray(string hexStr)
     {
         int[] intArray = new int[hexStr.Length];
-        foreach (var hexItem in hexStr.Select((hexChar, index) => new { hexChar, index }))
+        foreach (var hexItem in hexStr.Select((hexChar, index) => new {hexChar, index}))
         {
             intArray[hexItem.index] = Convert.ToInt32(hexItem.hexChar.ToString(), 16);
         }
+
         return intArray;
     }
 }
