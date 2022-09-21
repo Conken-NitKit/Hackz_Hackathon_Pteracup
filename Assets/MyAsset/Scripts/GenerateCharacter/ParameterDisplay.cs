@@ -18,7 +18,7 @@ public class ParameterDisplay : MonoBehaviour
     public void DecideStatus()
     {
         monster.BuildStatus(colorCode.HexadecimalCenterColor);
-        parameterText.text = $"HP : {monster.BaseHp}\nAttack : {monster.BaseAtk}\nDefence : {monster.BaseDef}\nMP : {monster.BaseMp}\n特殊コマンド : {monster.SpacialCommand}";
+        parameterText.text = $"HP : {monster.BaseHp * (int)monster.Buff}\nAttack : {monster.BaseAtk * (int)monster.Buff}\nDefence : {monster.BaseDef * (int)monster.Buff}\nMP : {monster.BaseMp * (int)monster.Buff}\n特殊コマンド : {monster.SpacialCommand}";
     }
 
 }

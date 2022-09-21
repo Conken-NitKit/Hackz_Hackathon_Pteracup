@@ -5,6 +5,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 /// <summary>
 /// 戦闘時のエネミーのステータス、コマンドの管理クラス
@@ -33,6 +34,8 @@ public class BattleEnemy : MonoBehaviour
 
     private IDisposable subscription;
     
+    private SceneAnimation sceneAnimation;
+    
     [SerializeField]
     private Text gameText;
     
@@ -50,6 +53,7 @@ public class BattleEnemy : MonoBehaviour
         
         monster = GameObject.FindWithTag("Monster").GetComponent<BattleMonster>();
         gameMgr = GameObject.FindWithTag("GameManager").GetComponent<BattleGameManager>();
+        sceneAnimation = GameObject.FindWithTag("GameManager").GetComponent<SceneAnimation>();
         
         EnemyInitialHp = Random.Range(hpRange.x, hpRange.y);
         enemyNowHp.Value = EnemyInitialHp;
@@ -59,6 +63,7 @@ public class BattleEnemy : MonoBehaviour
             {
                 enemyNowHp.Value = 0;
                 gameText.text = "エネミーは倒れた！";
+                sceneAnimation.RiseCurtain();
                 gameMgr.GoNextStage();
                 Destroy(this.gameObject);
             }
@@ -71,6 +76,8 @@ public class BattleEnemy : MonoBehaviour
         EnemyInitialDef = Random.Range(defRange.x, defRange.y);
         enemyNowDef = EnemyInitialDef;
         Debug.Log($"エネミーDef:{EnemyInitialDef}");
+
+        this.transform.DOMoveX(-4f, 1).SetDelay(5f).SetEase(Ease.OutBack);
     }
 
     /// <summary>

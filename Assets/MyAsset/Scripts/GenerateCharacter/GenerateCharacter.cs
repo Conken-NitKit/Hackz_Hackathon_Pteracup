@@ -25,8 +25,7 @@ public class GenerateCharacter : MonoBehaviour
 
     [SerializeField]
     private Text inputFieldText;
-
-
+    
     /// <summary>
     /// 値を渡す関数
     /// </summary>

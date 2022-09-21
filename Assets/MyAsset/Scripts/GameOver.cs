@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 
 /// <summary>
-/// GameOverScene‚©‚çTitleScene‚É‘JˆÚ‚·‚éƒXƒNƒŠƒvƒg
+/// GameOverSceneï¿½ï¿½ï¿½ï¿½TitleSceneï¿½É‘Jï¿½Ú‚ï¿½ï¿½ï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
 /// </summary>
 public class GameOver : MonoBehaviour
 {
@@ -13,6 +13,10 @@ public class GameOver : MonoBehaviour
     public async void Switch()
     {
         var sceneC = await SceneLoader.Load<Title>("Title");
+    }
+    
+    public void SetArguments(int score,string characterNam)
+    {
     }
 
     void Start()
