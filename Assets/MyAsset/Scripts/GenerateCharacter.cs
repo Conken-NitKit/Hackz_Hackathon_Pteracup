@@ -17,12 +17,9 @@ public class GenerateCharacter : MonoBehaviour
 
     [SerializeField]
     private FadeAnimation fadeAnimation;
-    /*
-    [SerializeField]
-    private RawImage rawImage;
     [SerializeField]
     private ColorCode colorCode;
-    */
+    
     [SerializeField]
     private Monster monster;
 
@@ -43,18 +40,12 @@ public class GenerateCharacter : MonoBehaviour
     /// <summary>
     /// FadeAnimationを動かすための関数
     /// </summary>
-    public void SetArguments(byte[] date)
+    public void SetArguments(byte[] bytes)
     {
-        /*
-        bytes = date;
         Texture2D texture = new Texture2D(200, 200);
         texture.filterMode = FilterMode.Trilinear;
         texture.LoadImage(bytes);
-
-        rawImage.texture = texture;
-        colorCode.Tex = texture;
-        colorCode.StartCoroutine(colorCode.GetCenterColor());
-        */
+        colorCode.StartCoroutine(colorCode.GetCenterColor(texture));
         fadeAnimation.Fade();
     }
 

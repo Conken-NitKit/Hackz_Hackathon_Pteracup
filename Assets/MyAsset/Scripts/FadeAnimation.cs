@@ -36,14 +36,25 @@ public class FadeAnimation : MonoBehaviour
 	private float rankTextPositionX = 0;
 	[SerializeField]
 	private float rankTextPositionY = 174;
+	
+	private Vector3 monsterEndPosition = new Vector3(-200, -20, 0);
+	
+	[SerializeField]
+	private Image monster;
 
 	private float positionZ = 0;
 	private float fadeValue = 1;
 
-	private string akagami;
+	[SerializeField]
+	private ColorCode colorCode;
+	
+	[SerializeField]
+	private ParameterDisplay parameterDisplay;
 
+	[SerializeField]
+	private MonsterBack monsterBack;
 
-
+	
 	public void Fade()
 	{
 		fade.FadeIn(2, () =>
@@ -55,30 +66,24 @@ public class FadeAnimation : MonoBehaviour
 
 	IEnumerator FadeInParameter()
     {
-		yield return new WaitForSeconds(fadeTime);
+	    yield return new WaitForSeconds(fadeTime);
 
-		/*
-		Texture2D texture = new Texture2D(200, 200);
-		texture.filterMode = FilterMode.Trilinear;
-		texture.LoadImage(bytes);
+	    yield return new WaitForSeconds(excutionTime);
 
-		rawImage.texture = texture;
-		akagami = colorCode.HexadecimalCenterColor;
-		*/
-		yield return new WaitForSeconds(excutionTime);
+	    parameterDisplay.DecideStatus();
 
 		backGround.DOFade(fadeValue, excutionTime);
-
+		
 		yield return new WaitForSeconds(excutionTime);
 
-		inputField.text = $"{akagami}îØÇÃÉVÉÉÉìÉNÉX";
+		inputField.text = $"{colorCode.HexadecimalCenterColor}È´™„ÅÆ„Ç∑„É£„É≥„ÇØ„Çπ";
+		monsterBack.SetMonsterBackColor();
 		rankText.transform.DOLocalMove(new Vector3(rankTextPositionX, rankTextPositionY, positionZ), excutionTime);
 		inputField.transform.DOLocalMove(new Vector3(inputFieldPositionX, inputFieldPositionY, positionZ), excutionTime);
 		parameterText.transform.DOLocalMove(new Vector3(parameterTextPositionX, parameterTextPositionY, positionZ), excutionTime);
+		monster.transform.DOLocalMove(monsterEndPosition, excutionTime).SetEase(Ease.OutBack);
 
 		yield return new WaitForSeconds(excutionTime);
-		
-
-	}
+    }
 
 }
