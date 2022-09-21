@@ -652,6 +652,7 @@ MonoBehaviour:
   colorCode: {fileID: 1296164718}
   gameMgr: {fileID: 296973442}
   gameText: {fileID: 1513799316}
+  hpText: {fileID: 284796918}
 --- !u!114 &730965735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +707,7 @@ MonoBehaviour:
     rgba: 0
   <SpacialCommand>k__BackingField: {fileID: 0}
   commands: []
+  MaxDiff: 0
 --- !u!222 &730965737
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1333,7 +1335,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 730965734}
         m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
-        m_MethodName: GenerateMonster
+        m_MethodName: DecideMonsterStatus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
