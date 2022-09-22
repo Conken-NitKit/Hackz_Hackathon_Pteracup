@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using DG.Tweening;
 
 /// <summary>
 /// 戦うモンスター（シャンクス）のステータス受け取り、コマンドのクラス
@@ -136,15 +137,26 @@ public class BattleMonster : MonoBehaviour
             {
                 DefendMonster();
             }
-            else if ("DisplayStatus" == methodName)
+            else if ("DoSpeCial" == methodName)
             {
-                DisplayStatus();
-                yield break;
+                if (monsterNowMp.Value - 5 < 0)
+                {
+                    gameText.text =  "MPが足りん！";
+                    yield break;
+                }
+
+                DoSpeCial();
+                monsterNowMp.Value -= 5;
             }
             
             buttonBlockPanel.SetActive(true);
 
             yield return new WaitForSeconds(2);
+            if (enemy.dieEnemy)
+            {
+                gameMgr.isPlayerTurn.SetValueAndForceNotify(true);
+                yield break;
+            }
             gameMgr.isPlayerTurn.Value = false;
         }
     }
@@ -155,6 +167,7 @@ public class BattleMonster : MonoBehaviour
     private void AttackMonster()
     {
         gameText.text =  "シャンクスの攻撃！";
+        this.transform.DOMoveX(-0.5f,0.2f).SetRelative(true).SetLoops(2,LoopType.Yoyo);
         enemy.AttackedEnemy(monsterNowAtk);
     }
 
@@ -164,7 +177,16 @@ public class BattleMonster : MonoBehaviour
     private void DefendMonster()
     {
         gameText.text = "シャンクスの防御！";
+        this.transform.DOScale(new Vector3(1.2f,1.2f,1.2f), 0.2f).SetLoops(2,LoopType.Yoyo);
         monsterNowDef *= 2;
+    }
+
+    private void DoSpeCial()
+    {
+        gameText.text = "シャンクスの回復！";
+        this.transform.DOMoveY(0.5f,0.05f).SetRelative(true).SetLoops(10,LoopType.Yoyo);
+        this.transform.DOScale(new Vector3(1.2f,1.2f,1.2f), 0.05f).SetLoops(10,LoopType.Yoyo);
+        monsterNowHp.Value += 10;
     }
 
     /// <summary>
@@ -186,6 +208,8 @@ public class BattleMonster : MonoBehaviour
     {
         int damageReceived = (enemyAtk - monsterNowDef > 0) ? enemyAtk - monsterNowDef : 0;        
         gameText.text = $"シャンクスは{damageReceived}ダメージ受けた！";
+        this.transform.DOMoveX(0.3f, 1f).SetRelative(true).SetLoops(2, LoopType.Yoyo);
+        this.transform.DORotate(new Vector3(0, 0, 10), 0.1f).SetRelative(true).SetLoops(10, LoopType.Yoyo);
         monsterNowHp.Value -= damageReceived;
     }
 

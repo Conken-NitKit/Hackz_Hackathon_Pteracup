@@ -24,7 +24,7 @@ public class BattleEnemy : MonoBehaviour
     public int enemyNowDef;
     private Vector2Int defRange = new Vector2Int(0,10);
 
-    private bool dieEnemy;
+    public bool dieEnemy{ get; private set; }
 
     [SerializeField]
     private BattleMonster monster;
@@ -54,6 +54,8 @@ public class BattleEnemy : MonoBehaviour
         {
             subscription.Dispose();
         }
+
+        dieEnemy = false;
         
         gameText = GameObject.FindWithTag("GameText").GetComponent<Text>();
         
@@ -67,9 +69,11 @@ public class BattleEnemy : MonoBehaviour
         subscription = enemyNowHp.Subscribe(x => {
             if (enemyNowHp.Value < 0)
             {
+                dieEnemy = true; 
                 enemyNowHp.Value = 0;
                 gameText.text = "エネミーは倒れた！";
                 sceneAnimation.RiseCurtain();
+                sceneAnimation.goNextStage = true;
                 gameMgr.GoNextStage();
                 Destroy(this.gameObject);
             }
@@ -113,27 +117,30 @@ public class BattleEnemy : MonoBehaviour
         
         int enemyCommandSeed = Random.Range(0, 10);
 
-        if (enemyCommandSeed >= 0 && enemyCommandSeed < 6)
+        if (!dieEnemy)
         {
-            AttackEnemy();
+            if (enemyCommandSeed >= 0 && enemyCommandSeed < 6)
+            {
+                AttackEnemy();
+            }
+            else if (enemyCommandSeed < 7)
+            {
+                DefendEnemy();
+            }
+            else if(enemyCommandSeed < 8)
+            {
+                AccumulateEnemyAtk();
+            }
+            else if (enemyCommandSeed < 9)
+            {
+                RecoverEnemyHp();
+            }
+            else
+            {
+                DoNothingEnemy();
+            }
         }
-        else if (enemyCommandSeed < 7)
-        {
-            DefendEnemy();
-        }
-        else if(enemyCommandSeed < 8)
-        {
-            AccumulateEnemyAtk();
-        }
-        else if (enemyCommandSeed < 9)
-        {
-            RecoverEnemyHp();
-        }
-        else
-        {
-            DoNothingEnemy();
-        }
-        
+
         yield return new WaitForSeconds(2);
         gameMgr.isPlayerTurn.Value = true;
     }

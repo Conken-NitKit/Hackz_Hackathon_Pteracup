@@ -135,10 +135,9 @@ GameObject:
   - component: {fileID: 112955577}
   - component: {fileID: 112955576}
   - component: {fileID: 112955575}
-  - component: {fileID: 112955578}
   m_Layer: 5
   m_Name: Monster
-  m_TagString: Monster
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,25 +224,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112955573}
   m_CullTransparentMesh: 1
---- !u!114 &112955578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112955573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c95983b3dfdc44c86a2ec49c250ac583, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonBlockPanel: {fileID: 267858562}
-  gameMgr: {fileID: 338864623}
-  sceneAnimation: {fileID: 338864625}
-  gameText: {fileID: 283326323}
-  hpText: {fileID: 565930964}
-  mpText: {fileID: 1318302675}
-  main: {fileID: 338864622}
 --- !u!1 &175283190
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db04bff646e11774fa9ac497a893f6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleMonster: {fileID: 112955578}
+  battleMonster: {fileID: 1400841259}
   monsterBack: {fileID: 1400841256}
   userNameText: {fileID: 194911444}
   battleGameManager: {fileID: 338864623}
@@ -818,9 +798,10 @@ MonoBehaviour:
   isPlayerTurn:
     value: 1
   baseEnemy: {fileID: 3393154869376818589, guid: 4769c17e263a54f85b10f3ca5938ca15, type: 3}
-  monster: {fileID: 112955578}
+  monster: {fileID: 1400841259}
   gameText: {fileID: 283326323}
   buttonBlockPanel: {fileID: 267858562}
+  sceneAnimation: {fileID: 338864625}
 --- !u!4 &338864624
 Transform:
   m_ObjectHideFlags: 0
@@ -1210,7 +1191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &777126665
 Transform:
   m_ObjectHideFlags: 0
@@ -1744,9 +1725,10 @@ GameObject:
   - component: {fileID: 1400841258}
   - component: {fileID: 1400841257}
   - component: {fileID: 1400841256}
+  - component: {fileID: 1400841259}
   m_Layer: 5
   m_Name: MonsterBack
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1823,6 +1805,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400841254}
   m_CullTransparentMesh: 1
+--- !u!114 &1400841259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400841254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c95983b3dfdc44c86a2ec49c250ac583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonBlockPanel: {fileID: 267858562}
+  gameMgr: {fileID: 338864623}
+  sceneAnimation: {fileID: 338864625}
+  gameText: {fileID: 283326323}
+  hpText: {fileID: 565930964}
+  mpText: {fileID: 1318302675}
+  main: {fileID: 338864622}
 --- !u!1 &1527064178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,6 +2014,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1400841259}
+        m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
+        m_MethodName: RunMonsterCommand
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DoSpeCial
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1531411328
@@ -2269,7 +2282,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 112955578}
+      - m_Target: {fileID: 1400841259}
         m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
         m_MethodName: RunMonsterCommand
         m_Mode: 5
@@ -3345,7 +3358,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 112955578}
+      - m_Target: {fileID: 1400841259}
         m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
         m_MethodName: RunMonsterCommand
         m_Mode: 5
