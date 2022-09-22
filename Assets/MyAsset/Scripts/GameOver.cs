@@ -15,6 +15,9 @@ public class GameOver : MonoBehaviour
     [SerializeField] 
     private Text scoreText;
 
+    [SerializeField]
+    private SendRanking sendRanking;
+
     public async void Switch()
     {
         var sceneC = await SceneLoader.Load<Title>("Title");
@@ -23,9 +26,9 @@ public class GameOver : MonoBehaviour
     public void SetArguments(int enemyKillScore,string characterName)
     {
         score = enemyKillScore;
-        
         charaName = characterName;
-        Debug.Log( $"{charaName} : {score}体");
+        
+        sendRanking.UserLogin(characterName,enemyKillScore);
         scoreText.text = $"敵を倒した数 : {score}体";
     }
 }

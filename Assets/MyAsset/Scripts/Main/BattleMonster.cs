@@ -96,6 +96,8 @@ public class BattleMonster : MonoBehaviour
                 {
                     monsterImage.DOFade(0f, 0.5f);
                 }
+
+                enemy.transform.DOMoveX(-10f, 0.5f).SetRelative(true);
                 sceneAnimation.RiseCurtain();
                 main.PassMainToGameOver();
                 diedMonster = false;

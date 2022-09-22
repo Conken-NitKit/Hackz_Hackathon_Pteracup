@@ -35,7 +35,7 @@ public class GenerateCharacter : MonoBehaviour
     
     [SerializeField]
     private Image[] images;
-    
+
     /// <summary>
     /// 値を渡す関数
     /// </summary>

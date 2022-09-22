@@ -74,9 +74,9 @@ public class WebCamController : MonoBehaviour
                     //colors[x + y * webcamTexture.width] = new Color(c.grayscale, c.grayscale, c.grayscale);
                 }
             }
-            bytes = texture.EncodeToPNG();
             texture.SetPixels32(colors);
             texture.Apply();
+            bytes = texture.EncodeToPNG();
             rawImage.texture = texture;
             webcamTexture.Stop();
             switchGenerateCharacterButton.transform.DOLocalMove(new Vector3(245f, 27f, 0), 3f);
