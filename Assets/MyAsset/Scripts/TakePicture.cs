@@ -25,9 +25,4 @@ public class TakePicture : MonoBehaviour
     {
         var sceneB = await SceneLoader.Load<Title>("Title");
     }
-
-    void Start()
-    {
-
-    }
 }
