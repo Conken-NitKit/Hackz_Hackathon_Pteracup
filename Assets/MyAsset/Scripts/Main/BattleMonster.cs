@@ -51,6 +51,9 @@ public class BattleMonster : MonoBehaviour
     [SerializeField]
     private Main main;
 
+    [SerializeField]
+    private Image[] monsterImages;
+
     /// <summary>
     /// 新しい敵が現れた時に、新しい敵のBattleEnemyコンポーネントを代入する
     /// </summary>
@@ -88,11 +91,15 @@ public class BattleMonster : MonoBehaviour
             {
                 gameText.text = "シャンクスは倒れた！";
                 monsterNowHp.Value = 0;
+                this.transform.DOMoveY(-5f,1f).SetRelative(true);
+                foreach (var monsterImage in monsterImages)
+                {
+                    monsterImage.DOFade(0f, 0.5f);
+                }
                 sceneAnimation.RiseCurtain();
                 main.PassMainToGameOver();
                 diedMonster = false;
             }
-
             hpText.text = $"{monsterNowHp.Value}";
         });
         
