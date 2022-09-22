@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class WebCamController : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class WebCamController : MonoBehaviour
 
     [SerializeField]
     RawImage rawImage;
+
+    [SerializeField]
+    private Button switchGenerateCharacterButton;
+
+    [SerializeField]
+    private Text switchGenerateCharacterText;
+
+    [SerializeField]
+    private GameObject Button;
 
     IEnumerator Init()
     {
@@ -69,6 +79,9 @@ public class WebCamController : MonoBehaviour
             texture.Apply();
             rawImage.texture = texture;
             webcamTexture.Stop();
+            switchGenerateCharacterButton.transform.DOLocalMove(new Vector3(245f, 27f, 0), 3f);
+            switchGenerateCharacterText.DOFade(1f, 3f);
+            Button.SetActive(true);
         }
     }
 
@@ -79,7 +92,18 @@ public class WebCamController : MonoBehaviour
         this.rawImage = GetComponent<RawImage>();
         this.rawImage.texture = webcamTexture;
         this.rawImage.enabled = true;
+        bytes = null;
         webcamTexture.Play();
+        StartCoroutine(Init());
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
+        switchGenerateCharacterButton.transform.DOLocalMove(new Vector3(245f, 150f, 0), 3f);
+        switchGenerateCharacterText.DOFade(0f, 3f);
+        yield return new WaitForSeconds(3f);
+        Button.SetActive(false);
     }
 
 }
