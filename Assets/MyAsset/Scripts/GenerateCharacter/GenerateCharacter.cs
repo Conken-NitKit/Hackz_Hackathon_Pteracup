@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 using System.IO;
+using DG.Tweening;
 using SimpleFileBrowser;
 using UnityEngine.UI;
 
@@ -13,6 +14,9 @@ using UnityEngine.UI;
 /// </summary>
 public class GenerateCharacter : MonoBehaviour
 {
+    [SerializeField]
+    private Fade fade;
+    
     private byte[] bytes;
 
     [SerializeField]
@@ -25,13 +29,29 @@ public class GenerateCharacter : MonoBehaviour
 
     [SerializeField]
     private Text inputFieldText;
-
-
+    
+    [SerializeField]
+    private Text[] texts;
+    
+    [SerializeField]
+    private Image[] images;
+    
     /// <summary>
     /// 値を渡す関数
     /// </summary>
     public async void PassGenerateToMain()
     {
+        foreach (var text in texts)
+        {
+            text.DOFade(0, 1f);
+        }
+        foreach (var image in images)
+        {
+            image.DOFade(0, 1f);
+        }
+        
+        fade.FadeIn(2f);
+        await Task.Delay(2000);
         var sceneB = await SceneLoader.Load<Main>("Main");
         sceneB.SetArguments(colorCode.HexadecimalCenterColor,inputFieldText.text, monster);
     }

@@ -12,7 +12,7 @@ public class Monster : MonoBehaviour
     /// ステータスバフ量
     /// </summary>
     [field: SerializeField, Header("強化倍率")] public float Buff { get; private set; }
-    [MinMaxSlider(0, 10)] [SerializeField] private Vector2 buffRange = new Vector2(1.0f,2.5f);
+    [MinMaxSlider(0, 10)] [SerializeField] public Vector2 BuffRange = new Vector2(1.0f, 2.5f);
 
     /// <summary>
     /// 基礎HP
@@ -86,8 +86,9 @@ public class Monster : MonoBehaviour
         double[] red = new double[] {255, 0, 0};
         double[] color32 = new double[] {StatusColor.r, StatusColor.g, StatusColor.b};
         double buffNum = new ColorUtil().CalcColorDifferent(color32,red);
-        float minBuff = buffRange.x,maxBuff = buffRange.y;
-        Buff = (100f - (float)buffNum) / 100f * (maxBuff-minBuff) + minBuff;
+        float minBuff = BuffRange.x,maxBuff = BuffRange.y;
+        float offset = Math.Abs((100f - (float)buffNum) / 100f * (maxBuff - minBuff));
+        Buff = offset + minBuff;
         //SpacialCommand = commands[rNum[1] % commands.Length];
 
         int seedMaxNum = 15;
@@ -108,7 +109,8 @@ public class Monster : MonoBehaviour
     private int CalcStatus(int value,int seedMax, Vector2Int minMax)
     {
         int min = minMax.x,max = minMax.y;
-        int offset = (int) Math.Round((double) value / (double) seedMax * max-min);
+        int offset = (int) Math.Round((double) value / (double) seedMax * (max-min));
+
         return offset + min;
     }
       
