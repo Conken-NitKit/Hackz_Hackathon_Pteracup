@@ -72,10 +72,12 @@ public class BattleEnemy : MonoBehaviour
                 dieEnemy = true; 
                 enemyNowHp.Value = 0;
                 gameText.text = "エネミーは倒れた！";
-                sceneAnimation.RiseCurtain();
+                this.transform.DOMoveY(-5f,1f).SetRelative(true);
+                this.gameObject.GetComponent<SpriteRenderer>().DOFade(0f, 0.5f);
+                sceneAnimation.RiseCurtain(); 
                 sceneAnimation.goNextStage = true;
                 gameMgr.GoNextStage();
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
         });
         Debug.Log($"エネミーHp:{enemyNowHp.Value}");
@@ -151,6 +153,7 @@ public class BattleEnemy : MonoBehaviour
     private void AttackEnemy()
     {
         gameText.text = "エネミーの攻撃！";
+        this.transform.DOMoveX(0.5f,0.2f).SetRelative(true).SetLoops(2,LoopType.Yoyo);
         monster.AttackedMonster(enemyNowAtk);
     }
 
@@ -160,6 +163,7 @@ public class BattleEnemy : MonoBehaviour
     private void DefendEnemy()
     {        
         gameText.text = "エネミーの防御！";
+        this.transform.DOScale(this.transform.localScale * 1.2f, 0.2f).SetLoops(2,LoopType.Yoyo);
         enemyNowDef *= 2;
     }
 
@@ -169,6 +173,7 @@ public class BattleEnemy : MonoBehaviour
     private void AccumulateEnemyAtk()
     {
         gameText.text = "エネミーは攻撃を貯めた！";
+        this.transform.DOScale(this.transform.localScale * 0.7f, 0.5f).SetLoops(2,LoopType.Yoyo);
         enemyNowAtk *= 2;
     }
 
@@ -178,6 +183,8 @@ public class BattleEnemy : MonoBehaviour
     private void RecoverEnemyHp()
     {
         gameText.text = "エネミーの回復！！";
+        this.transform.DOMoveY(0.5f,0.05f).SetRelative(true).SetLoops(10,LoopType.Yoyo);
+        this.transform.DOScale(this.transform.localScale * 1.2f, 0.05f).SetLoops(10,LoopType.Yoyo);
         enemyNowHp.Value += 10;
     }
 
@@ -187,6 +194,7 @@ public class BattleEnemy : MonoBehaviour
     private void DoNothingEnemy()
     {
         gameText.text = "あ！行動をサボった！";
+        this.transform.DORotate(new Vector3(0, 0, -90), 0.1f).SetRelative(true).SetLoops(2, LoopType.Yoyo);
     }
 
     /// <summary>
@@ -197,6 +205,8 @@ public class BattleEnemy : MonoBehaviour
     {
         int damageReceived = (playerMonsterAtk - enemyNowDef > 0) ? playerMonsterAtk - enemyNowDef : 0;
         gameText.text = $"エネミーは{damageReceived}ダメージ受けた！";
+        this.transform.DOMoveX(-0.3f, 1f).SetRelative(true).SetLoops(2, LoopType.Yoyo);
+        this.transform.DORotate(new Vector3(0, 0, -10), 0.1f).SetRelative(true).SetLoops(10, LoopType.Yoyo);
         enemyNowHp.Value -= damageReceived;
     }
 }

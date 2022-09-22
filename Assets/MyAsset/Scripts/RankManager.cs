@@ -28,31 +28,31 @@ public class RankManager : MonoBehaviour
 
         if (buffValue / buffMax > 0.95)
         {
-            rankText.text = "ƒ‰ƒ“ƒN : ŠC‘¯‰¤";
+            rankText.text = "ãƒ©ãƒ³ã‚¯ : æµ·è³Šç‹";
         }
         else if (buffValue / buffMax > 0.8)
         {
-            rankText.text = "ƒ‰ƒ“ƒN : lc";
+            rankText.text = "ãƒ©ãƒ³ã‚¯ : å››çš‡";
         }
         else if (buffValue / buffMax > 0.65)
         {
-            rankText.text = "ƒ‰ƒ“ƒN : ‰¤‰ºµ•ŠC";
+            rankText.text = "ãƒ©ãƒ³ã‚¯ : ç‹ä¸‹ä¸ƒæ­¦æµ·";
         }
         else if (buffValue / buffMax > 0.45)
         {
-            rankText.text = "ƒ‰ƒ“ƒN : –¼‚Ì’m‚ê‚½ŠC‘¯";
+            rankText.text = "ãƒ©ãƒ³ã‚¯ : åã®çŸ¥ã‚ŒãŸæµ·è³Š";
         }
         else if (buffValue / buffMax > 0.3)
         {
-            rankText.text = "ƒ‰ƒ“ƒN : ˆê”ÊŠC‘¯";
+            rankText.text = "ãƒ©ãƒ³ã‚¯ : æµ·è³Š";
         }
         else if (buffValue / buffMax > 0.1)
         {
-            rankText.text = "ƒ‰ƒ“ƒN : G‹›ŠC‘¯";
+            rankText.text = "ãƒ©ãƒ³ã‚¯ : é›‘é­šæµ·è³Š";
         }
         else
         {
-            rankText.text = "ƒ‰ƒ“ƒN : ˆê”Êl";
+            rankText.text = "ãƒ©ãƒ³ã‚¯ : ä¸€èˆ¬äºº";
         }
     }
 
