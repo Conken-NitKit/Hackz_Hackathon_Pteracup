@@ -8,6 +8,8 @@ public class SceneAnimation : MonoBehaviour
 {
     [SerializeField] 
     private GameObject curtains;
+    
+    public bool goNextStage { get; set; }
 
     private void Start()
     {
@@ -17,6 +19,10 @@ public class SceneAnimation : MonoBehaviour
     public void RiseCurtain()
     {
         curtains.transform.DOMoveY(15f,6f).SetEase(Ease.Linear)
-            .OnComplete(() => curtains.transform.position = new Vector3(0, -15f, 0));
+            .OnComplete(() =>
+            {
+                curtains.transform.position = new Vector3(0, -15f, 0);
+                goNextStage = false;
+            });
     }
 }

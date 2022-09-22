@@ -29,6 +29,9 @@ public class BattleGameManager : MonoBehaviour
     [SerializeField] 
     private GameObject buttonBlockPanel;
 
+    [SerializeField]
+    private SceneAnimation sceneAnimation;
+
     public int enemyKillNum{ get; private set; }
     
     /// <summary>
@@ -43,9 +46,6 @@ public class BattleGameManager : MonoBehaviour
         
         enemyObject = Instantiate(baseEnemy,new Vector3( -10f, 1.6f, 0.0f), Quaternion.identity);
         enemy = enemyObject.GetComponent<BattleEnemy>();
-        enemy.BuildEnemyStats();
-        
-        monster.TargetEnemy();
 
         enemyKillNum++;
         
@@ -59,10 +59,21 @@ public class BattleGameManager : MonoBehaviour
             }
             else
             {
-                gameText.text = "エネミーターン！";
-                enemy.StartCoroutine(enemy.RunEnemyCommand());
+                if (sceneAnimation.goNextStage)
+                {
+                    isPlayerTurn.Value = true;
+                }
+                else
+                {
+                    gameText.text = "エネミーターン！";
+                    enemy.StartCoroutine(enemy.RunEnemyCommand());
+                }
             }
         });
+        
+        enemy.BuildEnemyStats();
+        
+        monster.TargetEnemy();
     }
     
     /// <summary>
