@@ -72,4 +72,14 @@ public class WebCamController : MonoBehaviour
         }
     }
 
+    public void TakeAgain()
+    {
+        WebCamDevice[] devices = WebCamTexture.devices;
+        webcamTexture = new WebCamTexture(devices[0].name, this.width, this.height, this.fps);
+        this.rawImage = GetComponent<RawImage>();
+        this.rawImage.texture = webcamTexture;
+        this.rawImage.enabled = true;
+        webcamTexture.Play();
+    }
+
 }
