@@ -17,4 +17,10 @@ public class Title : MonoBehaviour
         var sceneA = await SceneLoader.Load<GenerateCharacter>("GenerateCharacter");
         sceneA.SetArguments(imageReference.bytes);
     }
+
+    public async void PassTitleToTake()
+    {
+        var sceneB = await SceneLoader.Load<TakePicture>("TakePicture");
+    }
+
 }

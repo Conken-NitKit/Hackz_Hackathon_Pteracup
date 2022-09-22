@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MyAsset/Scenes/GameScene/Ranking.unity
     guid: 8ae9a5cbb77a24911b49fe298813e01c
+  - enabled: 1
+    path: Assets/MyAsset/Scenes/GameScene/TakePicture.unity
+    guid: e0367b8dcc0911848b6d190e275aea00
   m_configObjects: {}
